@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+import Form from './components/Form';
+import ImpactForm from './components/ImpactForm1'
+import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import Home from './components/Home'
+import ImpactForm2  from './components/ImpactForm2';
+import ImpactForm3 from './components/ImpactForm3';
+import Pentagon from './components/Pentagon';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+            <Routes>
+                <Route exact path="/" element={<Home/>}/>
+                
+                <Route path="/feature-form" element={<Form/>}/>
+                <Route path="/impact-form" element={<ImpactForm/>}/>
+                <Route path="/impact-form2" element={< ImpactForm2/>} />
+                <Route path="/impact-form3" element={<ImpactForm3 />} />
+                <Route path="/pentagon" element={<Pentagon/>}/>
+
+            </Routes>
+            </Router>
     </div>
   );
 }
