@@ -1,7 +1,7 @@
 import { createStore, action, thunk } from "easy-peasy";
 
 const store = createStore({
-  pentagonObject: [],  
+  pentagonObject: [],
   impactArray: [
     {
       env_p:
@@ -37,46 +37,55 @@ const store = createStore({
     },
   ],
   updateImpactArray: action((state, payload) => {
-    const impactArr = state.impactArray
-    if (payload[0] !== -1 && payload[1] !== -1) {
-        impactArr.splice(payload[0], 1);
-        impactArr.splice(payload[1], 1);
-      }
-  
-    state.impactArray = impactArr;
+
+    state.impactArray = payload;
   }),
-  updatePentagonObj: action((state, payload)=>{
+  updatePentagonObj: action((state, payload) => {
     state.pentagonObject = payload
   }),
-  impactArrayPop: thunk(async (actions, state, dimension) => {
-    let indexToRemove1 = 0,
-      indexToRemove2 = 0;
-    const impactArr = state.impactArray;
-    console.log(impactArr);
-    if (dimension.name === "env_p" || dimension.name === "env_n") {
-      indexToRemove1 = impactArr.indexOf(0);
-      indexToRemove2 = impactArr.indexOf(1);
-    } else if (dimension.name === "social_p" || dimension.name === "social_n") {
-      indexToRemove1 = impactArr.indexOf(2);
-      indexToRemove2 = impactArr.indexOf(3);
-    } else if (
-      dimension.name === "economic_p" ||
-      dimension.name === "economic_n"
-    ) {
-      indexToRemove1 = impactArr.indexOf(4);
-      indexToRemove2 = impactArr.indexOf(5);
-    } else if (dimension.name === "ind_p" || dimension.name === "ind_n") {
-      indexToRemove1 = impactArr.indexOf(6);
-      indexToRemove2 = impactArr.indexOf(7);
-    }
+  impactArrayPop: thunk(async (actions, dimension) => {
+    try {
+      let filteredArr2 = []
+      console.log(dimension?.name);
+      const impactArr = dimension?.impactArray;
+      console.log(impactArr);
+      if (dimension?.answerObj?.name === "env_p" || dimension?.answerObj?.name === "env_n") {
+        filteredArr2 = impactArr.filter(obj => {
+          return !(obj.hasOwnProperty('env_p') || obj.hasOwnProperty('env_n'));
+        });
 
-    
-    actions.updateImpactArray([indexToRemove1, indexToRemove2]);
+      }
+      else if (dimension?.answerObj?.name === "social_p" || dimension?.answerObj?.name === "social_n") {
+        filteredArr2 = impactArr.filter(obj => {
+          return !(obj.hasOwnProperty('social_p') || obj.hasOwnProperty('social_n'));
+        });
+
+
+      } else if (
+        dimension?.answerObj?.name === "economic_p" ||
+        dimension?.answerObj?.name === "economic_n"
+      ) {
+        filteredArr2 = impactArr.filter(obj => {
+          return !(obj.hasOwnProperty('economic_p') || obj.hasOwnProperty('economic_n'));
+        });
+
+      } else if (dimension?.answerObj?.name === "ind_p" || dimension?.answerObj?.name === "ind_n") {
+        filteredArr2 = impactArr.filter(obj => {
+          return !(obj.hasOwnProperty('ind_p') || obj.hasOwnProperty('ind_n'));
+        });
+
+      }
+
+      actions.updateImpactArray(filteredArr2);
+
+    } catch (error) {
+      console.error(error)
+    }
   }),
-  maintainPentagon: thunk(async(actions, state, payload) => {
-     const pentagonObj = state.pentagonObject
-     pentagonObj.push(payload)
-     actions.updatePentagonObj(pentagonObj)
+  maintainPentagon: thunk(async (actions, payload) => {
+    const pentagonObj = payload.pentagonObject
+    pentagonObj.push(payload.answers)
+    actions.updatePentagonObj(pentagonObj)
   })
 
 });
