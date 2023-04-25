@@ -12,7 +12,13 @@ function ImpactAssessment() {
                 <div className="d-flex align-items-center justify-content-center">
                     Likelihood
                 </div>
-                <div className="d-flex flex-column">
+                <div style={{
+                    borderLeft: "1px solid black",
+                    height: "100%",
+                    position: "absolute",
+                    left: "10%"
+                }}></div>
+                <div className="d-flex flex-column w-100">
                     <div style={{ height: '100vh', top: 0, left: 0 }}>
                         <canvas id="my-canvas"></canvas>
                         {graphValues.map(point => {
@@ -33,13 +39,15 @@ function ImpactAssessment() {
                     </div>
                     <hr
                         style={{
-                            height: 5
+                            width: "100%",
+                            size: "20",
+                            color: "1px solid black"
                         }}
                     />
                     <div>Intensity</div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 
