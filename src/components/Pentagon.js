@@ -1,5 +1,6 @@
 import React from 'react';
 import { useStoreState } from "easy-peasy";
+import { Link } from 'react-router-dom';
 
 const Pentagon = () => {
     const colors = ['#f7f7f7', '#e5e5e5', '#d4d4d4'];
@@ -128,7 +129,7 @@ const Pentagon = () => {
     }
 
     return (
-        <div className="justify-content-center align-items-center">
+        <div className="d-flex flex-column justify-content-center align-items-center">
             <svg viewBox="-70 -70 140 140" width="100%" height="100%">
                 <defs>
                     <filter x="0" y="0" height="1" width="1" id="technology">
@@ -180,7 +181,10 @@ const Pentagon = () => {
                     {impactCards}
                 </g>
             </svg>
+            <button className='btn btn-primary'><Link to="/stepper">Add another feature</Link></button>
         </div>
+        
+
     );
 };
 

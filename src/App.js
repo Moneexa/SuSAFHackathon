@@ -1,25 +1,27 @@
-import FeatureForm from './components/FeatureForm';
-import ImpactForm from './components/ImpactForm1'
+import {React, useState} from "react";
+
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from './components/Home'
-import ImpactForm2 from './components/ImpactForm2';
-import ImpactForm3 from './components/ImpactForm3';
 import Pentagon from './components/Pentagon';
 import Header from './components/shared/Header';
+import StepForm from "./StepForm";
+
+
+
 import './App.css';
 
+
+
+
 function App() {
+
   return (
     <div className="App">
       <Header />
       <Router>
         <Routes>
           <Route exact path="/" element={<Home />} />
-
-          <Route path="/feature-form" element={<FeatureForm />} />
-          <Route path="/impact-form" element={<ImpactForm />} />
-          <Route path="/impact-form2" element={< ImpactForm2 />} />
-          <Route path="/impact-form3" element={<ImpactForm3 />} />
+          <Route path="/stepper" element={<StepForm />} />
           <Route path="/pentagon" element={<Pentagon />} />
 
         </Routes>
