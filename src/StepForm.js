@@ -6,7 +6,7 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Form } from "react-bootstrap";
-import { useStoreActions, useStoreState } from "easy-peasy";
+import { useStore, useStoreActions, useStoreState } from "easy-peasy";
 import { useNavigate } from "react-router-dom";
 
 const steps = ["Features", "Impact Form1", "Impact Form2", "Impact Form3"];
@@ -15,6 +15,9 @@ export default function StepForm() {
   const impactArray = useStoreState((state) => state.impactArray);
   const pentagonObject = useStoreState((state) => state.pentagonObject);
   const impactArrayPop = useStoreActions((actions) => actions.impactArrayPop);
+  const graphValues = useStoreState((state) => state.graphValues);
+  const changeGraphValues = useStoreActions((actions) => actions.changeGraphValues);
+
   const navigate = useNavigate();
   const maintainPentagon = useStoreActions(
     (actions) => actions.maintainPentagon
@@ -65,8 +68,6 @@ export default function StepForm() {
       });
 
     }
-    
-
     if (
       answers?.impact?.name === "env_p" ||
       answers?.impact?.name === "env_n"
@@ -121,12 +122,16 @@ export default function StepForm() {
     ans["effect"] = featureAnswers.feature
     ans["category"] = "enabling"
     pentagon(ans)
-    localStorage.setItem("featureForm",JSON.stringify(featureAnswers))
+    localStorage.setItem("featureForm", JSON.stringify(featureAnswers))
     const answerObj = featureAnswers.impact
 
     impactArrayPop({ impactArray, answerObj });
     pentagon(featureAnswers)
-    
+    const x = featureAnswers["intensity"]
+    const y = featureAnswers["likelihood"]
+    const text = featureAnswers["explanation"]
+    changeGraphValues({ graphValues, value: { x, y, text } })
+
   };
 
   const handleNext2 = () => {
@@ -138,10 +143,15 @@ export default function StepForm() {
 
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
-    localStorage.setItem("impact1Form",JSON.stringify(impact1Answers))
+    localStorage.setItem("impact1Form", JSON.stringify(impact1Answers))
     const answerObj = impact1Answers.impact
     impactArrayPop({ impactArray, answerObj });
     pentagon(impact1Answers)
+    const x = impact1Answers["intensity"]
+    const y = impact1Answers["likelihood"]
+    const text = impact1Answers["explanation"]
+    changeGraphValues({ graphValues, value: { x, y, text } })
+
   };
   const handleNext3 = () => {
     let newSkipped = skipped;
@@ -152,10 +162,15 @@ export default function StepForm() {
 
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
-    localStorage.setItem("impact2Form",JSON.stringify(impact2Answers))
+    localStorage.setItem("impact2Form", JSON.stringify(impact2Answers))
     const answerObj = impact2Answers.impact
     impactArrayPop({ impactArray, answerObj });
     pentagon(impact2Answers)
+    const x = impact2Answers["intensity"]
+    const y = impact2Answers["likelihood"]
+    const text = impact2Answers["explanation"]
+    changeGraphValues({ graphValues, value: { x, y, text } })
+
   };
   const handleNext4 = () => {
     let newSkipped = skipped;
@@ -166,12 +181,17 @@ export default function StepForm() {
 
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
-    localStorage.setItem("impact3Form",JSON.stringify(impact3Answers))
+    localStorage.setItem("impact3Form", JSON.stringify(impact3Answers))
     const answerObj = impact3Answers.impact
     impactArrayPop({ impactArray, answerObj });
     pentagon(impact3Answers)
+    const x = impact3Answers["intensity"]
+    const y = impact3Answers["likelihood"]
+    const text = impact3Answers["explanation"]
+    changeGraphValues({ graphValues, value: { x, y, text } })
+
     navigate('/pentagon')
-    
+
 
   };
 

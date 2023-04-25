@@ -2,6 +2,9 @@ import { createStore, action, thunk } from "easy-peasy";
 
 const store = createStore({
   pentagonObject: [],
+  graphLabels: [],
+  graphValues: [],
+  impactAss: [],
   impactArray: [
     {
       env_p:
@@ -86,7 +89,28 @@ const store = createStore({
     const pentagonObj = payload.pentagonObject
     pentagonObj.push(payload.answers)
     actions.updatePentagonObj(pentagonObj)
-  })
+  }),
+
+  updateGraphValues: action((state, payload) => {
+    state.graphValues = payload
+  }),
+  updateImpactAss: action((state, payload) => {
+    state.impactAss = payload
+  }),
+
+  changeGraphValues: thunk(async (actions, payload) => {
+    const graph = payload.graphValues
+    graph.push(payload.value)
+    actions.updateGraphValues(graph)
+
+  }),
+
+  changeImpactAss: thunk(async (actions, payload) => {
+    const graph = payload.impactAss
+    graph.push(payload.value)
+    actions.updateImpactAss(graph)
+
+  }),
 
 });
 

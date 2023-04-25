@@ -1,6 +1,7 @@
 import React from 'react';
 import { useStoreState } from "easy-peasy";
 import { Link } from 'react-router-dom';
+import { Row } from 'react-bootstrap';
 
 const Pentagon = () => {
     const colors = ['#f7f7f7', '#e5e5e5', '#d4d4d4'];
@@ -181,9 +182,14 @@ const Pentagon = () => {
                     {impactCards}
                 </g>
             </svg>
-            <button className='btn btn-primary'><Link to="/stepper">Add another feature</Link></button>
+            <Row>
+
+                <button className='btn btn-secondary'><Link to="/impact-assessment">See Impact Assessment</Link></button>
+
+                <button className='btn btn-primary'><Link to="/stepper">Add another feature</Link></button>
+            </Row>
         </div>
-        
+
 
     );
 };
