@@ -134,7 +134,7 @@ const Pentagon = () => {
             <svg viewBox="-70 -70 140 140" width="100%" height="100%">
                 <defs>
                     <filter x="0" y="0" height="1" width="1" id="technology">
-                        <feFlood flood-color="blue" result="bg" />
+                        <feFlood flood-color="#ADD8E6" result="bg" />
                         <feMerge>
                             <feMergeNode in="bg" />
                             <feMergeNode in="SourceGraphic" />

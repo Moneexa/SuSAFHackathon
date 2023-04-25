@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./ImpactForm.css";
 import { useStoreState, useStoreActions } from "easy-peasy";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 function ImpactForm() {
   const impactArray = useStoreState((state) => state.impactArray);
@@ -37,35 +37,31 @@ function ImpactForm() {
     setAnswers({ ...answers, [name]: value });
   };
   const pentagon = (answers) => {
-    const category = answers.classification;
-    const text = answers.explanation;
-    const arr = pentagonObject;
-    if (answers.impact.name === "env_p" || answers.impact.name === "env_n") {
-      arr.push({ effect: text, impact: "environment", category: category });
-    } else if (
-      answers.impact.name === "social_p" ||
-      answers.impact.name === "social_n"
-    ) {
-      arr.push({ effect: text, impact: "social", category: category });
-    } else if (
-      answers.impact.name === "ind_p" ||
-      answers.impact.name === "ind_n"
-    ) {
-      arr.push({ effect: text, impact: "individual", category: category });
-    } else if (
-      answers.impact.name === "economic_p" ||
-      answers.impact.name === "economic_n"
-    ) {
-      arr.push({ effect: text, impact: "economic", category: category });
-    }
+    const category = answers.classification
+    const text = answers.explanation
 
-    maintainPentagon(pentagonObject, arr);
-  };
+    if (answers?.impact?.name === "env_p" || answers?.impact?.name === "env_n") {
+      maintainPentagon({ pentagonObject, answers: { effect: text, impact: "environmental", category: category } })
+
+    }
+    else if (answers?.impact?.name === "social_p" || answers.impact.name === "social_n") {
+      maintainPentagon({ pentagonObject, answers: { effect: text, impact: "social", category: category } })
+
+    }
+    else if (answers.impact.name === "ind_p" || answers.impact.name === "ind_n") {
+      maintainPentagon({ pentagonObject, answers: { effect: text, impact: "individual", category: category } })
+    }
+    else if (answers.impact.name === "economic_p" || answers.impact.name === "economic_n") {
+      maintainPentagon({ pentagonObject, answers: { effect: text, impact: "economic", category: category } })
+    }
+    console.log(pentagonObject)
+  }
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("Submitting form with answers:", answers);
-    impactArrayPop(impactArray, answers.impact);
-    pentagon(answers);
+    const answerObj = answers.impact
+    impactArrayPop({ impactArray, answerObj });
+    pentagon(answers)
     navigate('/impact-form2')
 
     // Here you can add code to submit the form to a backend API or do other processing

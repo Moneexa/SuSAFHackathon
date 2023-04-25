@@ -123,7 +123,7 @@ const Pentagon = () => {
         const curveOffset = 20
         const pathInd = `M ${x1} ${y1} Q ${(x1 + x2) / 2 + curveOffset} ${(y1 + y2) / 2} ${x2} ${y2} M ${x2 - arrowLength} ${y2 - arrowWidth} L ${x2} ${y2} L ${x2 - arrowLength} ${y2 + arrowWidth}`;
 
-        pathDiags.push(<path key={i} d={pathInd} stroke="black" strokeWidth="0.5" fill="none" strokeLinecap='round' />
+        pathDiags.push(<path key={i} d={pathInd} stroke="black" strokeWidth="0.25" fill="none" strokeLinecap='round' />
         )
     }
 
@@ -132,7 +132,7 @@ const Pentagon = () => {
             <svg viewBox="-70 -70 140 140" width="100%" height="100%">
                 <defs>
                     <filter x="0" y="0" height="1" width="1" id="technology">
-                        <feFlood flood-color="blue" result="bg" />
+                        <feFlood flood-color="#6699CC" result="bg" />
                         <feMerge>
                             <feMergeNode in="bg" />
                             <feMergeNode in="SourceGraphic" />
