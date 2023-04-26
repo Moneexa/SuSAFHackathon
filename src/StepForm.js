@@ -316,7 +316,7 @@ export default function StepForm() {
     setImpact3Answers({ ...impact3Answers, [name]: value });
   };
   return (
-    <div className="d-flex justify-content-center align-items-center">
+    <div className="d-flex justify-content-center align-items-center m-5">
       <Box sx={{ width: "100%" }}>
         <Stepper activeStep={activeStep}>
           {steps.map((label, index) => {
@@ -340,7 +340,7 @@ export default function StepForm() {
         {activeStep === 0 ? (
           <Fragment>
             <Form
-              className="d-flex flex-wrap align-items-center w-100"
+              className="d-flex flex-wrap align-items-center m-5"
               style={{ textAlign: "left" }}
               onSubmit={handleNext1}
             >
@@ -349,7 +349,7 @@ export default function StepForm() {
               <div className="d-flex justify-content-between w-100">
                 <Form.Group
                   controlId="productName"
-                  className="m-1"
+                  className="m-3"
                 >
                   <Form.Label>
                     Name of the Product:
@@ -365,7 +365,7 @@ export default function StepForm() {
                   />
                 </Form.Group>
                 <Form.Group
-                  className="m-1"
+                  className="m-3"
                 >
                   <Form.Label>
                     The Feature you are assesing:
@@ -403,7 +403,7 @@ export default function StepForm() {
                   );
                 })}
               </Form.Group>
-              <Form.Group className="m-2">
+              <Form.Group className="m-2 w-100">
                 <Form.Label>
                   Explain the Impact of this feature in a short sentence:
                 </Form.Label>
@@ -418,36 +418,38 @@ export default function StepForm() {
                   onChange={handleInputChangeFeature}
                 />
               </Form.Group>
-              <Form.Group className="m-2">
-                <Form.Label>
-                  What is the likelihood of the occurance of the impact:
-                </Form.Label>
-                <Form.Control
-                  required
-                  type="number"
-                  min={0}
-                  max={100}
-                  id="likelihood-1"
-                  name="likelihood"
-                  value={featureAnswers.likelihood}
-                  onChange={handleInputChangeFeature}
-                />
-              </Form.Group>
-              <Form.Group className="m-2">
-                <Form.Label>
-                  What is the intensity of the occurance of the impact:
-                </Form.Label>
-                <Form.Control
-                  required
-                  type="number"
-                  min={0}
-                  max={100}
-                  id="intensity-1"
-                  name="intensity"
-                  value={featureAnswers.number}
-                  onChange={handleInputChangeFeature}
-                />
-              </Form.Group>
+              <div className="d-flex justify-content-between w-100">
+                <Form.Group className="m-2">
+                  <Form.Label>
+                    What is the likelihood of the occurance of the impact:
+                  </Form.Label>
+                  <Form.Control
+                    required
+                    type="number"
+                    min={0}
+                    max={100}
+                    id="likelihood-1"
+                    name="likelihood"
+                    value={featureAnswers.likelihood}
+                    onChange={handleInputChangeFeature}
+                  />
+                </Form.Group>
+                <Form.Group className="m-2">
+                  <Form.Label>
+                    What is the intensity of the occurance of the impact:
+                  </Form.Label>
+                  <Form.Control
+                    required
+                    type="number"
+                    min={0}
+                    max={100}
+                    id="intensity-1"
+                    name="intensity"
+                    value={featureAnswers.number}
+                    onChange={handleInputChangeFeature}
+                  />
+                </Form.Group>
+              </div>
               <Form.Group className="m-2">
                 <Form.Label>
                   How can you classify the impact occured:
@@ -516,13 +518,13 @@ export default function StepForm() {
         ) : activeStep === 1 ? (
           <Fragment>
             <Form
-              className="d-flex flex-wrap align-items-center"
+              className="d-flex flex-wrap align-items-center m-5"
               style={{ textAlign: "left" }}
               onSubmit={handleNext2}
             >
               <p className="formheading">You should know that each impact also has a consequent impact.</p>
               <Form.Group
-                className="col-md-7 col-sm-12 m-2"
+                className="m-3"
               >
                 <Form.Label>
                   Identifying the impact of your features
@@ -544,7 +546,7 @@ export default function StepForm() {
                 })}
               </Form.Group>
 
-              <Form.Group className="col-md-5 col-sm-12 m-2">
+              <Form.Group className="m-3 w-100">
                 <Form.Label >
                   Explain this Impact in a short sentence:
                 </Form.Label>
@@ -559,7 +561,10 @@ export default function StepForm() {
                   onChange={handleInputChangeImpact1}
                 />
               </Form.Group>
-              <Form.Group className="col-md-3 col-sm-12 m-2">
+              <div className="">
+
+              </div>
+              <Form.Group className="m-3">
                 <Form.Label>
                   What is the likelihood of the occurance of the impact:
                 </Form.Label>
