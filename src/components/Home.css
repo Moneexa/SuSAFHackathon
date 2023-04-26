@@ -45,3 +45,9 @@ body {
     cursor: pointer;
   }
   
+  .img {
+    display: block;
+    margin: 0 auto;
+    width: auto;
+    height: 30%;
+  }

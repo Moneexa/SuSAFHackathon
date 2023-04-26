@@ -1,34 +1,35 @@
 import { createStore, action, thunk } from "easy-peasy";
 
 const store = createStore({
+  featureObject : [], 
   pentagonObject: [],
-  graphLabels: [],
   graphValues: [],
-  impactAss: [],
+
   impactArray: [
     {
       env_p:
-        "It affects environment i.e. produces waste, has a large carbon footprint, utilizes excessive amount of resources.",
+        "It has a negative impact on the environment i.e. by creating waste, leaving a significant carbon footprint, and consuming a considerable amount of resources, etc",
     },
     {
       env_n:
-        "It has a positive impact on the environment e.g. reduces the use of any resources, makes any process efficient.",
+        "It has a positive impact on the environment i.e. by minimising resource consumption and increasing process efficiency, etc.",
     },
     {
       social_p:
-        "It impacts society by improving the living conditions of humans.",
+        "It has a positive impact on society i.e. by improving the living conditions of humans, facilitating collaboration, enhancing the learning experience, etc.",
+
     },
     {
       social_n:
-        "It could have a negative impact on society e.g harms social interaction.",
+        "It has a negative impact on society i.e. by harming social interaction, perpetuating biases and discrimination, etc."
     },
     {
       economic_p:
-        " It positively impacts economy e.g. creates monetary value, promotes innovation, increases GDP of the region, improves governance.",
+      " It has a positive impact on the economy i.e. by generating monetary value, fostering innovation, increasing GDP, etc.",
     },
     {
       economic_n:
-        "It negatively impacts economy e.g. job loss, financial loss, relies heavily on financial resources.",
+        " It has a negative impact on the economy i.e. by relying heavily on financial resources, causing job and financial loss, etc.",
     },
     {
       ind_p:
@@ -85,33 +86,31 @@ const store = createStore({
       console.error(error)
     }
   }),
+  setImpactArray: thunk(async (actions, payload) => {
+    actions.updateImpactArray(payload)
+  }),
   maintainPentagon: thunk(async (actions, payload) => {
     const pentagonObj = payload.pentagonObject
     pentagonObj.push(payload.answers)
     actions.updatePentagonObj(pentagonObj)
   }),
-
+  updateFeaturesObj: action((state, payload) => {
+    state.feature = payload
+  }),
+  maintainFeature: thunk(async (actions, payload) => {
+    const featureObj = payload.featureObject
+    featureObj.push(payload.response)
+    actions.updateFeaturesObj(featureObj)
+  }),
   updateGraphValues: action((state, payload) => {
     state.graphValues = payload
   }),
-  updateImpactAss: action((state, payload) => {
-    state.impactAss = payload
-  }),
-
   changeGraphValues: thunk(async (actions, payload) => {
     const graph = payload.graphValues
     graph.push(payload.value)
     actions.updateGraphValues(graph)
 
   }),
-
-  changeImpactAss: thunk(async (actions, payload) => {
-    const graph = payload.impactAss
-    graph.push(payload.value)
-    actions.updateImpactAss(graph)
-
-  }),
-
 });
 
 export default store;

@@ -1,0 +1,50 @@
+.formheading {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #fff; /* font color */
+    padding: 10px 20px;
+    width: 200px; /* change to desired width */
+    background-color: #ff69b4; /* pink background color */
+    border-radius: 10px;
+  }
+  
+  .formheading::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -20px;
+    transform: translateY(-50%);
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 20px solid #ff69b4; /* pink background color */
+  }
+  
+  
+  .d-flex {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .align-items-center {
+    align-items: center;
+  }
+  
+  form {
+    width: 100%;
+    max-width: 800px; /* adjust as needed */
+    margin: 0 auto; /* center the form horizontally */
+  }
+  
+  body {
+    height: 100%; /* set body height to 100% */
+  }
+  
+  html {
+    height: 100%; /* set html height to 100% */
+  }
+  
+  
