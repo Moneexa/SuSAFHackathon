@@ -253,11 +253,9 @@ const Pentagon = () => {
     const arrowLength = 3; // Length of arrowhead
     const arrowWidth = 1; // Width of arrowhead
     const curveOffset = 20;
-    const pathInd = `M ${x1} ${y1} Q ${(x1 + x2) / 2 + curveOffset} ${
-      (y1 + y2) / 2
-    } ${x2} ${y2} M ${x2 - arrowLength} ${y2 - arrowWidth} L ${x2} ${y2} L ${
-      x2 - arrowLength
-    } ${y2 + arrowWidth}`;
+    const pathInd = `M ${x1} ${y1} Q ${(x1 + x2) / 2 + curveOffset} ${(y1 + y2) / 2
+      } ${x2} ${y2} M ${x2 - arrowLength} ${y2 - arrowWidth} L ${x2} ${y2} L ${x2 - arrowLength
+      } ${y2 + arrowWidth}`;
 
     pathDiags.push(
       <path
@@ -273,6 +271,7 @@ const Pentagon = () => {
 
 
   return (
+
     <div
       id="pentagonsvg"
       className="d-flex flex-column justify-content-center align-items-center"
@@ -342,16 +341,13 @@ const Pentagon = () => {
           {impactCards}
         </g>
       </svg>
-                    {impactCards}
-                </g>
-            </svg>
-            <Row>
+      <Row>
 
-                <button className='btn btn-secondary'><Link to="/impact-assessment">See Impact Assessment</Link></button>
+        <button className='btn btn-secondary'><Link to="/impact-assessment">See Impact Assessment</Link></button>
 
-                <button className='btn btn-primary'><Link to="/stepper">Add another feature</Link></button>
-            </Row>
-        </div>
+        <button className='btn btn-primary'><Link to="/stepper">Add another feature</Link></button>
+      </Row>
+    </div >
 
   );
 };

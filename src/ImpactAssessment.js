@@ -5,7 +5,7 @@ import Draggable from 'react-draggable';
 
 function ImpactAssessment() {
     const graphValues = useStoreState((state) => state.graphValues);
-    const colors = ['#fb56b9', '#ff65a3', '#7afcff', '#deff9c', '#fff740'];
+    const colors = ['#fb56b9', '#aa65a3', '#7afcff', '#deff9c', '#fff740'];
     return (
         <div className="m-5">
             <div className="d-flex">
@@ -13,8 +13,8 @@ function ImpactAssessment() {
                     Likelihood
                 </div>
                 <div style={{
-                    borderLeft: "1px solid black",
-                    height: "50%",
+                    borderLeft: "0.5px solid black",
+                    height: "100%",
                     position: "absolute",
                     left: "10%"
                 }}></div>
