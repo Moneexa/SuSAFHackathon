@@ -1,12 +1,6 @@
 import React from 'react';
 import ImpactAssessment from './ImpactAssessment';
 
-const someArr = [{ effect: 'automate something', impact: 'technology', category: 'enabling' },
-{ effect: 'reduce locomotion', impact: 'economic', category: 'structural' },
-{ effect: 'reduce need of people', impact: 'social', category: 'structural' },
-{ effect: 'job loss', impact: 'individual', category: 'immediate' },
-{ effect: 'no pollution', impact: 'environmental', category: 'immediate' },
-]
 const Pentagon = () => {
     const colors = ['#f7f7f7', '#e5e5e5', '#d4d4d4'];
     const lines = [];

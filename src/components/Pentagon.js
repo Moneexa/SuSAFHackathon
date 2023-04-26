@@ -1,8 +1,9 @@
+
 import { React, useState } from "react";
 import { useStoreState, useStoreActions } from "easy-peasy";
 import { Link } from "react-router-dom";
-import { svgIconClasses } from "@mui/material";
 import { Row } from "react-bootstrap";
+
 const Pentagon = () => {
   const colors = ["#f7f7f7", "#e5e5e5", "#d4d4d4"];
   const pentagon = useStoreState((state) => state.pentagonObject);
@@ -270,6 +271,7 @@ const Pentagon = () => {
     );
   }
 
+
   return (
     <div
       id="pentagonsvg"
@@ -340,22 +342,17 @@ const Pentagon = () => {
           {impactCards}
         </g>
       </svg>
+                    {impactCards}
+                </g>
+            </svg>
+            <Row>
 
-      <Row>
-        <button className="btn btn-secondary m-3">
-          <Link to="/impact-assessment">Generate graph</Link>
-        </button>
+                <button className='btn btn-secondary'><Link to="/impact-assessment">See Impact Assessment</Link></button>
 
-        <button
-          onClick={() =>
-            repopulateArray(document.getElementById("pentagonsvg"))
-          }
-          className="btn btn-primary m-3"
-        >
-          <Link to="/stepper">Add another feature</Link>
-        </button>
-      </Row>
-    </div>
+                <button className='btn btn-primary'><Link to="/stepper">Add another feature</Link></button>
+            </Row>
+        </div>
+
   );
 };
 

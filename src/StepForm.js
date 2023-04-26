@@ -73,8 +73,6 @@ export default function StepForm() {
       });
 
     }
-    
-
     if (
       answers?.impact?.name === "env_p" ||
       answers?.impact?.name === "env_n"
@@ -129,8 +127,6 @@ export default function StepForm() {
     ans["effect"] = featureAnswers.feature
     ans["category"] = "enabling"
     pentagon(ans)
-    localStorage.setItem("featureForm",JSON.stringify(featureAnswers))
-    
     const answerObj = featureAnswers.impact
 
     impactArrayPop({ impactArray, answerObj });
@@ -140,8 +136,8 @@ export default function StepForm() {
     const text = featureAnswers["explanation"]
     changeGraphValues({ graphValues, value: { x, y, text } })
 
-    
-  };
+
+};
 
   const handleNext2 = () => {
     let newSkipped = skipped;
@@ -152,7 +148,7 @@ export default function StepForm() {
 
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
-    localStorage.setItem("impact1Form",JSON.stringify(impact1Answers))
+    localStorage.setItem("impact1Form", JSON.stringify(impact1Answers))
     const answerObj = impact1Answers.impact
     impactArrayPop({ impactArray, answerObj });
     pentagon(impact1Answers)
@@ -170,7 +166,7 @@ export default function StepForm() {
 
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
-    localStorage.setItem("impact2Form",JSON.stringify(impact2Answers))
+    localStorage.setItem("impact2Form", JSON.stringify(impact2Answers))
     const answerObj = impact2Answers.impact
     impactArrayPop({ impactArray, answerObj });
     pentagon(impact2Answers)
@@ -189,7 +185,7 @@ export default function StepForm() {
 
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
-    localStorage.setItem("impact3Form",JSON.stringify(impact3Answers))
+    localStorage.setItem("impact3Form", JSON.stringify(impact3Answers))
     const answerObj = impact3Answers.impact
     impactArrayPop({ impactArray, answerObj });
     pentagon(impact3Answers)
@@ -209,7 +205,7 @@ export default function StepForm() {
     changeGraphValues({ graphValues, value: { x, y, text } })
 
     navigate('/pentagon')
-    
+
 
   };
 
