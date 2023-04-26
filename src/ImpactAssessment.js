@@ -5,7 +5,7 @@ import Draggable from 'react-draggable';
 
 function ImpactAssessment() {
     const graphValues = useStoreState((state) => state.graphValues);
-    const colors = ['#ff7eb9', '#ff65a3', '#7afcff', '#feff9c', '#fff740'];
+    const colors = ['#fb56b9', '#ff65a3', '#7afcff', '#deff9c', '#fff740'];
     return (
         <div className="m-5">
             <div className="d-flex">
@@ -14,14 +14,13 @@ function ImpactAssessment() {
                 </div>
                 <div style={{
                     borderLeft: "1px solid black",
-                    height: "100%",
+                    height: "50%",
                     position: "absolute",
                     left: "10%"
                 }}></div>
                 <div className="d-flex flex-column w-100">
                     <div style={{ height: '100vh', top: 0, left: 0 }}>
-                        <canvas id="my-canvas"></canvas>
-                        {graphValues.map(point => {
+                        {graphValues.map((point, index) => {
                             return <Draggable><div style={{
                                 display: 'inline-block',
                                 position: 'absolute',
@@ -30,18 +29,19 @@ function ImpactAssessment() {
                                 padding: '10px',
                                 width: '100px',
                                 height: '100px',
-                                backgroundColor: colors[Math.floor(Math.random() * colors.length)]
+                                backgroundColor: colors[index]
                             }}>
                                 <div>{point.text}</div>
                             </div>
                             </Draggable>
                         })}
                     </div>
+
                     <hr
                         style={{
                             width: "100%",
                             size: "20",
-                            color: "1px solid black"
+                            borderLeft: "1px solid black"
                         }}
                     />
                     <div>Intensity</div>

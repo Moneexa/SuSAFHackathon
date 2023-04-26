@@ -52,27 +52,28 @@ const store = createStore({
       console.log(dimension?.name);
       const impactArr = dimension?.impactArray;
       console.log(impactArr);
-      if (dimension?.answerObj?.name === "env_p" || dimension?.answerObj?.name === "env_n") {
-        filteredArr2 = impactArr.filter(obj => {
-          return !(obj.hasOwnProperty('env_p') || obj.hasOwnProperty('env_n'));
+      const obj = Object.keys(dimension?.answerObj)[0]
+      if (obj === "env_p" || obj === "env_n") {
+        filteredArr2 = impactArr.filter(ob => {
+          return !(ob.hasOwnProperty('env_p') || ob.hasOwnProperty('env_n'));
         });
 
       }
-      else if (dimension?.answerObj?.name === "social_p" || dimension?.answerObj?.name === "social_n") {
-        filteredArr2 = impactArr.filter(obj => {
-          return !(obj.hasOwnProperty('social_p') || obj.hasOwnProperty('social_n'));
+      else if (obj === "social_p" || obj === "social_n") {
+        filteredArr2 = impactArr.filter(ob => {
+          return !(ob.hasOwnProperty('social_p') || ob.hasOwnProperty('social_n'));
         });
 
 
       } else if (
-        dimension?.answerObj?.name === "economic_p" ||
-        dimension?.answerObj?.name === "economic_n"
+        obj === "economic_p" ||
+        obj === "economic_n"
       ) {
-        filteredArr2 = impactArr.filter(obj => {
-          return !(obj.hasOwnProperty('economic_p') || obj.hasOwnProperty('economic_n'));
+        filteredArr2 = impactArr.filter(ob => {
+          return !(ob.hasOwnProperty('economic_p') || ob.hasOwnProperty('economic_n'));
         });
 
-      } else if (dimension?.answerObj?.name === "ind_p" || dimension?.answerObj?.name === "ind_n") {
+      } else if (obj === "ind_p" || obj === "ind_n") {
         filteredArr2 = impactArr.filter(obj => {
           return !(obj.hasOwnProperty('ind_p') || obj.hasOwnProperty('ind_n'));
         });

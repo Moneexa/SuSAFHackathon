@@ -68,33 +68,28 @@ export default function StepForm() {
       });
 
     }
+    const obj = Object.keys(answers?.impact)[0]
     if (
-      answers?.impact?.name === "env_p" ||
-      answers?.impact?.name === "env_n"
+      obj === "env_p" || obj === "env_n"
     ) {
       maintainPentagon({
         pentagonObject,
         answers: { effect: text, impact: "environmental", category: category },
       });
-    } else if (
-      answers?.impact?.name === "social_p" ||
-      answers.impact.name === "social_n"
+    } else if (obj === "social_p" || obj === "social_n"
     ) {
       maintainPentagon({
         pentagonObject,
         answers: { effect: text, impact: "social", category: category },
       });
-    } else if (
-      answers.impact.name === "ind_p" ||
-      answers.impact.name === "ind_n"
+    } else if (obj === "ind_p" || obj === "ind_n"
     ) {
       maintainPentagon({
         pentagonObject,
         answers: { effect: text, impact: "individual", category: category },
       });
-    } else if (
-      answers.impact.name === "economic_p" ||
-      answers.impact.name === "economic_n"
+    } else if (obj === "economic_p" ||
+      obj === "economic_n"
     ) {
       maintainPentagon({
         pentagonObject,
@@ -114,7 +109,7 @@ export default function StepForm() {
       newSkipped = new Set(newSkipped.values());
       newSkipped.delete(activeStep);
     }
-
+    console.log(featureAnswers);
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
     const ans = {}
@@ -124,13 +119,14 @@ export default function StepForm() {
     pentagon(ans)
     localStorage.setItem("featureForm", JSON.stringify(featureAnswers))
     const answerObj = featureAnswers.impact
-
+    console.log(answerObj)
     impactArrayPop({ impactArray, answerObj });
-    pentagon(featureAnswers)
     const x = featureAnswers["intensity"]
     const y = featureAnswers["likelihood"]
     const text = featureAnswers["explanation"]
     changeGraphValues({ graphValues, value: { x, y, text } })
+    pentagon(featureAnswers)
+
 
   };
 
@@ -213,53 +209,21 @@ export default function StepForm() {
       return newSkipped;
     });
   };
-
-  const handleReset = () => {
-    setActiveStep(0);
-  };
-  const handleSubmit1 = (event) => {
-    event.preventDefault();
-    console.log("Submitting form with answers:", featureAnswers);
-    const answerObj = featureAnswers.impact
-    localStorage.setItem('featureData', featureAnswers)
-    impactArrayPop({ impactArray, answerObj });
-    pentagon(featureAnswers)
-  };
-  const handleSubmit2 = (event) => {
-    event.preventDefault();
-    console.log("Submitting form with answers:", impact1Answers);
-    const answerObj = impact1Answers.impact
-    localStorage.setItem('featureData', impact1Answers)
-    impactArrayPop({ impactArray, answerObj });
-    pentagon(impact1Answers)
-  };
-  const handleSubmit3 = (event) => {
-    event.preventDefault();
-    console.log("Submitting form with answers:", impact2Answers);
-    const answerObj = impact2Answers.impact
-    localStorage.setItem('featureData', impact2Answers)
-    impactArrayPop({ impactArray, answerObj });
-    pentagon(impact2Answers)
-  };
-  const handleSubmit4 = (event) => {
-    event.preventDefault();
-    console.log("Submitting form with answers:", impact3Answers);
-    const answerObj = impact3Answers.impact
-    localStorage.setItem('featureData', impact3Answers)
-    impactArrayPop({ impactArray, answerObj });
-    pentagon(impact3Answers)
-
-  };
-
   const handleInputChangeFeature = (event) => {
     const { name, value } = event.target;
     setFeatureAnswers({ ...featureAnswers, [name]: value });
   };
   const handleInputRadioFeature = (e) => {
     const { name, value } = e.target;
-    let answerImpact = featureAnswers;
-    answerImpact["impact"] = { name, value };
-    setFeatureAnswers({ ...featureAnswers, answerImpact });
+    console.log({ name, value })
+    const impactArr = impactArray;
+    let val = "";
+    impactArr.map((elem) => {
+      if (Object.keys(elem)[0] === value) {
+        val = elem[value]
+      }
+    })
+    setFeatureAnswers({ ...featureAnswers, [name]: { [value]: val } });
   };
   const handleInputRadio2Feature = (e) => {
     const { name, value } = e.target;
@@ -272,9 +236,15 @@ export default function StepForm() {
   };
   const handleInputRadioImpact1 = (e) => {
     const { name, value } = e.target;
-    let answerImpact = impact1Answers;
-    answerImpact["impact"] = { name, value };
-    setImpact1Answers({ ...impact1Answers, answerImpact });
+    console.log({ name, value })
+    const impactArr = impactArray;
+    let val = "";
+    impactArr.map((elem) => {
+      if (Object.keys(elem)[0] === value) {
+        val = elem[value]
+      }
+    })
+    setImpact1Answers({ ...impact1Answers, [name]: { [value]: val } });
   };
   const handleInputRadio2Impact1 = (e) => {
     const { name, value } = e.target;
@@ -287,14 +257,28 @@ export default function StepForm() {
   };
   const handleInputRadioImpact2 = (e) => {
     const { name, value } = e.target;
-    let answerImpact = impact2Answers;
-    answerImpact["impact"] = { name, value };
-    setImpact2Answers({ ...impact2Answers, answerImpact });
+    console.log({ name, value })
+    const impactArr = impactArray;
+    let val = "";
+    impactArr.map((elem) => {
+      if (Object.keys(elem)[0] === value) {
+        val = elem[value]
+      }
+    })
+    setImpact2Answers({ ...impact2Answers, [name]: { [value]: val } });
   };
   const handleInputRadio2Impact2 = (e) => {
     const { name, value } = e.target;
+    console.log({ name, value })
+    const impactArr = impactArray;
+    let val = "";
+    impactArr.map((elem) => {
+      if (Object.keys(elem)[0] === value) {
+        val = elem[value]
+      }
+    })
 
-    setImpact2Answers({ ...impact2Answers, [name]: value });
+    setImpact2Answers({ ...impact2Answers, [name]: { [value]: val } });
   };
   const handleInputChangeImpact3 = (event) => {
     const { name, value } = event.target;
@@ -302,9 +286,15 @@ export default function StepForm() {
   };
   const handleInputRadioImpact3 = (e) => {
     const { name, value } = e.target;
-    let answerImpact = impact3Answers;
-    answerImpact["impact"] = { name, value };
-    setImpact3Answers({ ...impact3Answers, answerImpact });
+    console.log({ name, value })
+    const impactArr = impactArray;
+    let val = "";
+    impactArr.map((elem) => {
+      if (Object.keys(elem)[0] === value) {
+        val = elem[value]
+      }
+    })
+    setImpact3Answers({ ...impact3Answers, [name]: { [value]: val } });
   };
   const handleInputRadio2Impact3 = (e) => {
     const { name, value } = e.target;
@@ -338,16 +328,17 @@ export default function StepForm() {
             <Form
               className="d-flex flex-wrap align-items-center"
               style={{ textAlign: "left" }}
-              onSubmit={handleSubmit1}
+              onSubmit={handleNext1}
             >
               <Form.Group
                 controlId="productName"
                 className="col-md-6 col-sm-12 m-1"
               >
-                <Form.Label htmlFor="product_name">
+                <Form.Label>
                   Name of the Product:
                 </Form.Label>
                 <Form.Control
+                  required
                   type="text"
                   id="product_name"
                   name="product_name"
@@ -357,13 +348,13 @@ export default function StepForm() {
                 />
               </Form.Group>
               <Form.Group
-                controlId="featureName"
                 className="col-md-6 col-sm-12 m-1"
               >
-                <Form.Label htmlFor="feature">
+                <Form.Label>
                   The Feature you are assesing:
                 </Form.Label>
                 <Form.Control
+                  required
                   type="text"
                   id="feature"
                   name="feature"
@@ -372,10 +363,9 @@ export default function StepForm() {
                 />
               </Form.Group>
               <Form.Group
-                controlId="featureName"
                 className="col-md-7 col-sm-12 m-2"
               >
-                <Form.Label htmlFor="impact">
+                <Form.Label >
                   Identifying the impact of your features
                 </Form.Label>
                 {impactArray?.map((value, index) => {
@@ -383,9 +373,10 @@ export default function StepForm() {
                     <div key={index}>
                       <Form.Check
                         type="radio"
+                        required
                         id={`radio${index}`}
-                        name={Object.keys(value)[0]}
-                        value={Object.values(value)[0]}
+                        name="impact"
+                        value={Object.keys(value)[0]}
                         onChange={handleInputRadioFeature}
                         label={Object.values(value)[0]}
                       />
@@ -394,10 +385,11 @@ export default function StepForm() {
                 })}
               </Form.Group>
               <Form.Group className="col-md-5 col-sm-12 m-2">
-                <Form.Label htmlFor="explanation">
+                <Form.Label>
                   Explain the Impact of this feature in a short sentence:
                 </Form.Label>
                 <Form.Control
+                  required
                   as="textarea"
                   type="text"
                   rows={3}
@@ -408,11 +400,14 @@ export default function StepForm() {
                 />
               </Form.Group>
               <Form.Group className="col-md-3 col-sm-12 m-2">
-                <Form.Label htmlFor="likelihood">
+                <Form.Label>
                   What is the likelihood of the occurance of the impact:
                 </Form.Label>
                 <Form.Control
-                  type="text"
+                  required
+                  type="number"
+                  min={0}
+                  max={100}
                   id="likelihood"
                   name="likelihood"
                   value={featureAnswers.likelihood}
@@ -420,11 +415,14 @@ export default function StepForm() {
                 />
               </Form.Group>
               <Form.Group className="col-md-3 col-sm-12 m-2">
-                <Form.Label htmlFor="intensity">
+                <Form.Label>
                   What is the intensity of the occurance of the impact:
                 </Form.Label>
                 <Form.Control
+                  required
                   type="number"
+                  min={0}
+                  max={0}
                   id="intensity"
                   name="intensity"
                   value={featureAnswers.number}
@@ -437,6 +435,7 @@ export default function StepForm() {
                 </Form.Label>
 
                 <Form.Check
+                  required
                   type="radio"
                   id="radio-1"
                   name="classification"
@@ -500,23 +499,23 @@ export default function StepForm() {
             <Form
               className="d-flex flex-wrap align-items-center"
               style={{ textAlign: "left" }}
-              onSubmit={handleSubmit2}
+              onSubmit={handleNext2}
             >
               <Form.Group
-                controlId="featureName"
                 className="col-md-7 col-sm-12 m-2"
               >
-                <Form.Label htmlFor="impact">
+                <Form.Label>
                   Identifying the impact of your features
                 </Form.Label>
                 {impactArray?.map((value, index) => {
                   return (
                     <div key={index}>
                       <Form.Check
+                        required
                         type="radio"
                         id={`radio${index}`}
-                        name={Object.keys(value)[0]}
-                        value={Object.values(value)[0]}
+                        name="impact"
+                        value={Object.keys(value)[0]}
                         onChange={handleInputRadioImpact1}
                         label={Object.values(value)[0]}
                       />
@@ -526,10 +525,11 @@ export default function StepForm() {
               </Form.Group>
 
               <Form.Group className="col-md-5 col-sm-12 m-2">
-                <Form.Label htmlFor="explanation">
+                <Form.Label >
                   Explain this Impact in a short sentence:
                 </Form.Label>
                 <Form.Control
+                  required
                   as="textarea"
                   type="text"
                   rows={3}
@@ -540,11 +540,14 @@ export default function StepForm() {
                 />
               </Form.Group>
               <Form.Group className="col-md-3 col-sm-12 m-2">
-                <Form.Label htmlFor="likelihood">
+                <Form.Label>
                   What is the likelihood of the occurance of the impact:
                 </Form.Label>
                 <Form.Control
-                  type="text"
+                  required
+                  type="number"
+                  min={0}
+                  max={100}
                   id="likelihood"
                   name="likelihood"
                   value={impact1Answers.likelihood}
@@ -552,11 +555,14 @@ export default function StepForm() {
                 />
               </Form.Group>
               <Form.Group className="col-md-3 col-sm-12 m-2">
-                <Form.Label htmlFor="intensity">
+                <Form.Label>
                   What is the intensity of the occurance of the impact:
                 </Form.Label>
                 <Form.Control
+                  required
                   type="number"
+                  min={0}
+                  max={100}
                   id="intensity"
                   name="intensity"
                   value={impact1Answers.number}
@@ -570,7 +576,8 @@ export default function StepForm() {
 
                 <Form.Check
                   type="radio"
-                  id="radio-1"
+                  required
+                  id="radio-5"
                   name="classification"
                   value="immediate"
                   onChange={handleInputRadio2Impact1}
@@ -580,7 +587,8 @@ export default function StepForm() {
 
                 <Form.Check
                   type="radio"
-                  id="radio-2"
+                  required
+                  id="radio-6"
                   name="classification"
                   value="immediate"
                   onChange={handleInputRadio2Impact1}
@@ -588,7 +596,7 @@ export default function StepForm() {
                 />
                 <Form.Check
                   type="radio"
-                  id="radio-3"
+                  id="radio-7"
                   name="classification"
                   value="enabling"
                   onChange={handleInputRadio2Impact1}
@@ -598,7 +606,7 @@ export default function StepForm() {
 
                 <Form.Check
                   type="radio"
-                  id="radio-4"
+                  id="radio-8"
                   name="classification"
                   value="structural"
                   onChange={handleInputRadio2Impact1}
@@ -633,23 +641,23 @@ export default function StepForm() {
             <Form
               className="d-flex flex-wrap align-items-center"
               style={{ textAlign: "left" }}
-              onSubmit={handleSubmit3}
+              onSubmit={handleNext3}
             >
               <Form.Group
-                controlId="featureName"
                 className="col-md-7 col-sm-12 m-2"
               >
-                <Form.Label htmlFor="impact">
+                <Form.Label>
                   Identifying the impact of your features
                 </Form.Label>
                 {impactArray?.map((value, index) => {
                   return (
                     <div key={index}>
                       <Form.Check
+                        required
                         type="radio"
                         id={`radio${index}`}
-                        name={Object.keys(value)[0]}
-                        value={Object.values(value)[0]}
+                        name="impact"
+                        value={Object.keys(value)[0]}
                         onChange={handleInputRadioImpact2}
                         label={Object.values(value)[0]}
                       />
@@ -659,10 +667,11 @@ export default function StepForm() {
               </Form.Group>
 
               <Form.Group className="col-md-5 col-sm-12 m-2">
-                <Form.Label htmlFor="explanation">
+                <Form.Label>
                   Explain the Impact of this feature in a short sentence:
                 </Form.Label>
                 <Form.Control
+                  required
                   as="textarea"
                   type="text"
                   rows={3}
@@ -673,7 +682,7 @@ export default function StepForm() {
                 />
               </Form.Group>
               <Form.Group className="col-md-3 col-sm-12 m-2">
-                <Form.Label htmlFor="likelihood">
+                <Form.Label>
                   What is the likelihood of the occurance of the impact:
                 </Form.Label>
                 <Form.Control
@@ -685,7 +694,7 @@ export default function StepForm() {
                 />
               </Form.Group>
               <Form.Group className="col-md-3 col-sm-12 m-2">
-                <Form.Label htmlFor="intensity">
+                <Form.Label>
                   What is the intensity of the occurance of the impact:
                 </Form.Label>
                 <Form.Control
@@ -702,8 +711,9 @@ export default function StepForm() {
                 </Form.Label>
 
                 <Form.Check
+                  required
                   type="radio"
-                  id="radio-1"
+                  id="radio-9"
                   name="classification"
                   value="immediate"
                   onChange={handleInputRadio2Impact2}
@@ -712,16 +722,18 @@ export default function StepForm() {
                 />
 
                 <Form.Check
+                  required
                   type="radio"
-                  id="radio-2"
+                  id="radio-10"
                   name="classification"
                   value="immediate"
                   onChange={handleInputRadio2Impact2}
                   label="The impact is one of the major criticism this project can get."
                 />
                 <Form.Check
+                  required
                   type="radio"
-                  id="radio-3"
+                  id="radio-11"
                   name="classification"
                   value="enabling"
                   onChange={handleInputRadio2Impact2}
@@ -730,8 +742,9 @@ export default function StepForm() {
                 />
 
                 <Form.Check
+                  required
                   type="radio"
-                  id="radio-4"
+                  id="radio-12"
                   name="classification"
                   value="structural"
                   onChange={handleInputRadio2Impact2}
@@ -766,23 +779,23 @@ export default function StepForm() {
             <Form
               className="d-flex flex-wrap align-items-center"
               style={{ textAlign: "left" }}
-              onSubmit={handleSubmit4}
+              onSubmit={handleNext4}
             >
               <Form.Group
-                controlId="featureName"
                 className="col-md-7 col-sm-12 m-2"
               >
-                <Form.Label htmlFor="impact">
+                <Form.Label>
                   Identifying the impact of your features
                 </Form.Label>
                 {impactArray?.map((value, index) => {
                   return (
                     <div key={index}>
                       <Form.Check
+                        required
                         type="radio"
                         id={`radio${index}`}
-                        name={Object.keys(value)[0]}
-                        value={Object.values(value)[0]}
+                        name="impact"
+                        value={Object.keys(value)[0]}
                         onChange={handleInputRadioImpact3}
                         label={Object.values(value)[0]}
                       />
@@ -792,10 +805,11 @@ export default function StepForm() {
               </Form.Group>
 
               <Form.Group className="col-md-5 col-sm-12 m-2">
-                <Form.Label htmlFor="explanation">
+                <Form.Label>
                   Explain the Impact of this feature in a short sentence:
                 </Form.Label>
                 <Form.Control
+                  required
                   as="textarea"
                   type="text"
                   rows={3}
@@ -806,11 +820,14 @@ export default function StepForm() {
                 />
               </Form.Group>
               <Form.Group className="col-md-3 col-sm-12 m-2">
-                <Form.Label htmlFor="likelihood">
+                <Form.Label>
                   What is the likelihood of the occurance of the impact:
                 </Form.Label>
                 <Form.Control
-                  type="text"
+                  type="number"
+                  required
+                  min={0}
+                  max={100}
                   id="likelihood"
                   name="likelihood"
                   value={impact3Answers.likelihood}
@@ -818,11 +835,14 @@ export default function StepForm() {
                 />
               </Form.Group>
               <Form.Group className="col-md-3 col-sm-12 m-2">
-                <Form.Label htmlFor="intensity">
+                <Form.Label>
                   What is the intensity of the occurance of the impact:
                 </Form.Label>
                 <Form.Control
                   type="number"
+                  required
+                  min={0}
+                  max={100}
                   id="intensity"
                   name="intensity"
                   value={impact3Answers.number}
@@ -836,7 +856,7 @@ export default function StepForm() {
 
                 <Form.Check
                   type="radio"
-                  id="radio-1"
+                  id="radio-13"
                   name="classification"
                   value="immediate"
                   onChange={handleInputRadio2Impact3}
@@ -846,7 +866,7 @@ export default function StepForm() {
 
                 <Form.Check
                   type="radio"
-                  id="radio-2"
+                  id="radio-14"
                   name="classification"
                   value="immediate"
                   onChange={handleInputRadio2Impact3}
@@ -854,7 +874,7 @@ export default function StepForm() {
                 />
                 <Form.Check
                   type="radio"
-                  id="radio-3"
+                  id="radio-15"
                   name="classification"
                   value="enabling"
                   onChange={handleInputRadio2Impact3}
@@ -864,7 +884,7 @@ export default function StepForm() {
 
                 <Form.Check
                   type="radio"
-                  id="radio-4"
+                  id="radio-16"
                   name="classification"
                   value="structural"
                   onChange={handleInputRadio2Impact3}
