@@ -340,46 +340,49 @@ export default function StepForm() {
         {activeStep === 0 ? (
           <Fragment>
             <Form
-              className="d-flex flex-wrap align-items-center"
+              className="d-flex flex-wrap align-items-center w-100"
               style={{ textAlign: "left" }}
               onSubmit={handleNext1}
             >
               <h1 className="formheading">First, tell us a bit about the feature whose impact you are planning to asses.</h1>
               <h2 className="formheading">We want you to begin thinking about the most immidiate impact of that feature.</h2>
+              <div className="d-flex justify-content-between w-100">
+                <Form.Group
+                  controlId="productName"
+                  className="m-1"
+                >
+                  <Form.Label>
+                    Name of the Product:
+                  </Form.Label>
+                  <Form.Control
+                    required
+                    type="text"
+                    id="product_name"
+                    name="product_name"
+                    value={featureAnswers.product_name}
+                    onChange={handleInputChangeFeature}
+                    placeholder="type the name of product"
+                  />
+                </Form.Group>
+                <Form.Group
+                  className="m-1"
+                >
+                  <Form.Label>
+                    The Feature you are assesing:
+                  </Form.Label>
+                  <Form.Control
+                    required
+                    type="text"
+                    id="feature"
+                    name="feature"
+                    value={featureAnswers.feature}
+                    onChange={handleInputChangeFeature}
+                  />
+                </Form.Group>
+
+              </div>
               <Form.Group
-                controlId="productName"
-                className="col-md-6 col-sm-12 m-1"
-              >
-                <Form.Label>
-                  Name of the Product:
-                </Form.Label>
-                <Form.Control
-                  required
-                  type="text"
-                  id="product_name"
-                  name="product_name"
-                  value={featureAnswers.product_name}
-                  onChange={handleInputChangeFeature}
-                  placeholder="type the name of product"
-                />
-              </Form.Group>
-              <Form.Group
-                className="col-md-6 col-sm-12 m-1"
-              >
-                <Form.Label>
-                  The Feature you are assesing:
-                </Form.Label>
-                <Form.Control
-                  required
-                  type="text"
-                  id="feature"
-                  name="feature"
-                  value={featureAnswers.feature}
-                  onChange={handleInputChangeFeature}
-                />
-              </Form.Group>
-              <Form.Group
-                className="col-md-7 col-sm-12 m-2"
+                className="m-2"
               >
                 <Form.Label >
                   Identifying the impact of your features
@@ -400,7 +403,7 @@ export default function StepForm() {
                   );
                 })}
               </Form.Group>
-              <Form.Group className="col-md-5 col-sm-12 m-2">
+              <Form.Group className="m-2">
                 <Form.Label>
                   Explain the Impact of this feature in a short sentence:
                 </Form.Label>
@@ -415,7 +418,7 @@ export default function StepForm() {
                   onChange={handleInputChangeFeature}
                 />
               </Form.Group>
-              <Form.Group className="col-md-3 col-sm-12 m-2">
+              <Form.Group className="m-2">
                 <Form.Label>
                   What is the likelihood of the occurance of the impact:
                 </Form.Label>
@@ -430,7 +433,7 @@ export default function StepForm() {
                   onChange={handleInputChangeFeature}
                 />
               </Form.Group>
-              <Form.Group className="col-md-3 col-sm-12 m-2">
+              <Form.Group className="m-2">
                 <Form.Label>
                   What is the intensity of the occurance of the impact:
                 </Form.Label>
@@ -445,7 +448,7 @@ export default function StepForm() {
                   onChange={handleInputChangeFeature}
                 />
               </Form.Group>
-              <Form.Group className="col-md-6 col-sm-12 m-2">
+              <Form.Group className="m-2">
                 <Form.Label>
                   How can you classify the impact occured:
                 </Form.Label>
