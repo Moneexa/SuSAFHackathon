@@ -30,6 +30,7 @@ function Learn() {
     <p>Covers the capability of systems to adapt to changes, including their maintainability, usability, extensibility and adaptability, security, and scalability.</p>
   </div>
   <Link to="/stepper" className="button">I am READY!!! Take me to the Tool.</Link>
+  <Link to="/functionalrequirements" className="button">Start telling us about your product</Link>
 </div>
 
   )

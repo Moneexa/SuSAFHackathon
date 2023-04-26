@@ -343,10 +343,14 @@ const Pentagon = () => {
         </g>
       </svg>
       <Row>
+      <button className='btn btn-primary m-3 align-items-right' onClick={() => {
+                navigate('/stepper')
+            }}>Add another feature</button>
 
         <button className='btn btn-secondary m-3' onClick={() => {
           navigate('/impact-assessment')
         }}>See Impact Assessment</button>
+        
         <Link to="/doc" className="m-3">Go check the document</Link>
 
       </Row>

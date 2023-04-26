@@ -26,10 +26,7 @@ function DocumentTemplate() {
                 <Page style={{ padding: "50px" }}>
                     <Text style={{ fontSize: "20px", textAlign: "center", margin: "20px" }}> Your SusAF Assessment Report</Text>
                     <Text style={{ fontSize: "15px" }}>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-                        molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-                        numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
-                        optio, eaque rerum! Provident similique accusantium nemo autem.
+                    Through the use of the Susaf Analysis framework, organizations can effectively evaluate the sustainability dimensions of each product feature. This approach ensures that sustainability is integrated into every aspect of the product design and development process, resulting in products that are more sustainable in terms of social, technical, individual, economic, and environmental sustainability. As a result, organizations can make informed decisions on how best to address sustainability challenges, resulting in products that are more socially responsible and environmentally sustainable. By conducting a sustainability analysis using Susaf Analysis, organizations can make significant progress towards a more sustainable future.
                     </Text>
                     <Text style={{ fontSize: "15px" }}>
                         The Name of the product : {featureObject[0]?.featureAnswers?.product_name}

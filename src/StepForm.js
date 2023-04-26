@@ -7,20 +7,29 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Form } from "react-bootstrap";
 import { useStoreActions, useStoreState } from "easy-peasy";
+import FunctionalRequirements from "./components/FunctionalRequirements";
+import DropdownMenu from "./components/DropDownMenu";
 import './StepForm.css';
 import { useNavigate } from "react-router-dom";
 
-const steps = ["Features", "Impact Form1", "Impact Form2", "Impact Form3"];
 
-export default function StepForm() {
+const steps = ["Feature Selection and 1st Degree Impact", "2nd Degree Impact", "3rd Degree Impact", "4th Degree Impact"];
+
+export default function StepForm({options}) {
   const impactArray = useStoreState((state) => state.impactArray);
   const pentagonObject = useStoreState((state) => state.pentagonObject);
   const impactArrayPop = useStoreActions((actions) => actions.impactArrayPop);
   const featureObject = useStoreState((state) => state.featureObject);
   const graphValues = useStoreState((state) => state.graphValues);
   const changeGraphValues = useStoreActions((actions) => actions.changeGraphValues);
+  const [selectedfeature, setSelectedFeature] = useState('');
+  const [featureslist, setFeatureslist] = useState([]);
+
+
 
   const navigate = useNavigate();
+
+  
   const maintainFeature = useStoreActions(
     (actions) => actions.maintainFeature
   );
@@ -33,7 +42,7 @@ export default function StepForm() {
     return step === 3;
   };
   const [featureAnswers, setFeatureAnswers] = useState({
-    product_name: "",
+
     feature: "",
     likelihood: "",
     intensity: "",
@@ -345,47 +354,35 @@ export default function StepForm() {
               onSubmit={handleNext1}
             >
               <h1 className="formheading">First, tell us a bit about the feature whose impact you are planning to asses.</h1>
-              <h2 className="formheading">We want you to begin thinking about the most immidiate impact of that feature.</h2>
+              <h2 className="formheading">We want you to begin thinking about one feature. You can start with any! Then think of the most immidiate impact of that feature.</h2>
               <div className="d-flex justify-content-between w-100">
-                <Form.Group
-                  controlId="productName"
-                  className="m-3"
-                >
-                  <Form.Label>
-                    Name of the Product:
-                  </Form.Label>
+                
+                  <Form.Group className="m-3">
+                  <Form.Label>The Feature you are assessing:</Form.Label>
                   <Form.Control
                     required
-                    type="text"
-                    id="product_name"
-                    name="product_name"
-                    value={featureAnswers.product_name}
+                    as="select"
+                    id="featureslist"
+                    name="featureslist"
+                    value={options}
                     onChange={handleInputChangeFeature}
-                    placeholder="type the name of product"
-                  />
+                  >
+                    <option value="">Select a feature</option>
+                    {options.map((selectedfeature, index) => (
+                      <option key={index} value={selectedfeature}>
+                        {selectedfeature}
+                      </option>
+                    ))}
+                  </Form.Control>
                 </Form.Group>
-                <Form.Group
-                  className="m-3"
-                >
-                  <Form.Label>
-                    The Feature you are assesing:
-                  </Form.Label>
-                  <Form.Control
-                    required
-                    type="text"
-                    id="feature"
-                    name="feature"
-                    value={featureAnswers.feature}
-                    onChange={handleInputChangeFeature}
-                  />
-                </Form.Group>
+
 
               </div>
               <Form.Group
                 className="m-2"
               >
                 <Form.Label >
-                  Identifying the impact of your features
+                  Identifying the impact of your feature
                 </Form.Label>
                 {impactArray?.map((value, index) => {
                   return (
@@ -522,12 +519,13 @@ export default function StepForm() {
               style={{ textAlign: "left" }}
               onSubmit={handleNext2}
             >
-              <p className="formheading">You should know that each impact also has a consequent impact.</p>
+              <h1>{selectedfeature}</h1>
+              <p className="formheading">You should know that each impact also has a consequent impact. So enter the impact of Impact no. 1. </p>
               <Form.Group
                 className="m-3"
               >
                 <Form.Label>
-                  Identifying the impact of your features
+                  Identifying the impact of your feature
                 </Form.Label>
                 {impactArray?.map((value, index) => {
                   return (
@@ -676,7 +674,7 @@ export default function StepForm() {
                 className="m-3"
               >
                 <Form.Label>
-                  Identifying the impact of your features
+                  Identifying the impact of your feature
                 </Form.Label>
                 {impactArray?.map((value, index) => {
                   return (
@@ -822,7 +820,7 @@ export default function StepForm() {
                 className="m-3"
               >
                 <Form.Label>
-                  Identifying the impact of your features
+                  Identifying the impact of your feature
                 </Form.Label>
                 {impactArray?.map((value, index) => {
                   return (
