@@ -6,7 +6,8 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Form } from "react-bootstrap";
-import { useStore, useStoreActions, useStoreState } from "easy-peasy";
+import { useStoreActions, useStoreState } from "easy-peasy";
+import './StepForm.css';
 import { useNavigate } from "react-router-dom";
 
 const steps = ["Features", "Impact Form1", "Impact Form2", "Impact Form3"];
@@ -15,10 +16,14 @@ export default function StepForm() {
   const impactArray = useStoreState((state) => state.impactArray);
   const pentagonObject = useStoreState((state) => state.pentagonObject);
   const impactArrayPop = useStoreActions((actions) => actions.impactArrayPop);
+  const featureObject = useStoreState((state) => state.featureObject);
   const graphValues = useStoreState((state) => state.graphValues);
   const changeGraphValues = useStoreActions((actions) => actions.changeGraphValues);
 
   const navigate = useNavigate();
+  const maintainFeature = useStoreActions(
+    (actions) => actions.maintainFeature
+  );
   const maintainPentagon = useStoreActions(
     (actions) => actions.maintainPentagon
   );
@@ -117,7 +122,6 @@ export default function StepForm() {
     ans["effect"] = featureAnswers.feature
     ans["category"] = "enabling"
     pentagon(ans)
-    localStorage.setItem("featureForm", JSON.stringify(featureAnswers))
     const answerObj = featureAnswers.impact
     console.log(answerObj)
     impactArrayPop({ impactArray, answerObj });
@@ -126,6 +130,7 @@ export default function StepForm() {
     const text = featureAnswers["explanation"]
     changeGraphValues({ graphValues, value: { x, y, text } })
     pentagon(featureAnswers)
+
 
 
   };
@@ -147,7 +152,6 @@ export default function StepForm() {
     const y = impact1Answers["likelihood"]
     const text = impact1Answers["explanation"]
     changeGraphValues({ graphValues, value: { x, y, text } })
-
   };
   const handleNext3 = () => {
     let newSkipped = skipped;
@@ -181,6 +185,16 @@ export default function StepForm() {
     const answerObj = impact3Answers.impact
     impactArrayPop({ impactArray, answerObj });
     pentagon(impact3Answers)
+    const response = {
+      featureAnswers,
+      impact1Answers,
+      impact2Answers,
+      impact3Answers
+    }
+
+
+    maintainFeature({ featureObject, response })
+    console.log(featureObject);
     const x = impact3Answers["intensity"]
     const y = impact3Answers["likelihood"]
     const text = impact3Answers["explanation"]
@@ -330,6 +344,8 @@ export default function StepForm() {
               style={{ textAlign: "left" }}
               onSubmit={handleNext1}
             >
+              <h1 className="formheading">First, tell us a bit about the feature whose impact you are planning to asses.</h1>
+              <h2 className="formheading">We want you to begin thinking about the most immidiate impact of that feature.</h2>
               <Form.Group
                 controlId="productName"
                 className="col-md-6 col-sm-12 m-1"
@@ -408,7 +424,7 @@ export default function StepForm() {
                   type="number"
                   min={0}
                   max={100}
-                  id="likelihood"
+                  id="likelihood-1"
                   name="likelihood"
                   value={featureAnswers.likelihood}
                   onChange={handleInputChangeFeature}
@@ -422,8 +438,8 @@ export default function StepForm() {
                   required
                   type="number"
                   min={0}
-                  max={0}
-                  id="intensity"
+                  max={100}
+                  id="intensity-1"
                   name="intensity"
                   value={featureAnswers.number}
                   onChange={handleInputChangeFeature}
@@ -501,6 +517,7 @@ export default function StepForm() {
               style={{ textAlign: "left" }}
               onSubmit={handleNext2}
             >
+              <p className="formheading">You should know that each impact also has a consequent impact.</p>
               <Form.Group
                 className="col-md-7 col-sm-12 m-2"
               >
@@ -548,7 +565,7 @@ export default function StepForm() {
                   type="number"
                   min={0}
                   max={100}
-                  id="likelihood"
+                  id="likelihood-2"
                   name="likelihood"
                   value={impact1Answers.likelihood}
                   onChange={handleInputChangeImpact1}
@@ -563,7 +580,7 @@ export default function StepForm() {
                   type="number"
                   min={0}
                   max={100}
-                  id="intensity"
+                  id="intensity-2"
                   name="intensity"
                   value={impact1Answers.number}
                   onChange={handleInputChangeImpact1}
@@ -643,6 +660,7 @@ export default function StepForm() {
               style={{ textAlign: "left" }}
               onSubmit={handleNext3}
             >
+              <p className="formheading">You guessed it right! your second impact also has a consequent impact!</p>
               <Form.Group
                 className="col-md-7 col-sm-12 m-2"
               >
@@ -686,8 +704,10 @@ export default function StepForm() {
                   What is the likelihood of the occurance of the impact:
                 </Form.Label>
                 <Form.Control
-                  type="text"
-                  id="likelihood"
+                  type="number"
+                  min={0}
+                  max={1000}
+                  id="likelihood-3"
                   name="likelihood"
                   value={impact2Answers.likelihood}
                   onChange={handleInputChangeImpact2}
@@ -699,7 +719,9 @@ export default function StepForm() {
                 </Form.Label>
                 <Form.Control
                   type="number"
-                  id="intensity"
+                  min={0}
+                  max={100}
+                  id="intensity-3"
                   name="intensity"
                   value={impact2Answers.number}
                   onChange={handleInputChangeImpact2}
@@ -781,6 +803,7 @@ export default function StepForm() {
               style={{ textAlign: "left" }}
               onSubmit={handleNext4}
             >
+              <p className="formheading">Hope you are able to see that we are building the 'chain of impacts'</p>
               <Form.Group
                 className="col-md-7 col-sm-12 m-2"
               >
@@ -825,10 +848,9 @@ export default function StepForm() {
                 </Form.Label>
                 <Form.Control
                   type="number"
-                  required
                   min={0}
                   max={100}
-                  id="likelihood"
+                  id="likelihood-4"
                   name="likelihood"
                   value={impact3Answers.likelihood}
                   onChange={handleInputChangeImpact3}
@@ -843,7 +865,7 @@ export default function StepForm() {
                   required
                   min={0}
                   max={100}
-                  id="intensity"
+                  id="intensity-4"
                   name="intensity"
                   value={impact3Answers.number}
                   onChange={handleInputChangeImpact3}

@@ -1,5 +1,6 @@
 import React from 'react';
 import ImpactAssessment from './ImpactAssessment';
+
 const Pentagon = () => {
     const colors = ['#f7f7f7', '#e5e5e5', '#d4d4d4'];
     const lines = [];
