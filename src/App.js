@@ -8,10 +8,6 @@ import ImpactAssessment from "./ImpactAssessment";
 import StepForm from "./StepForm";
 import './App.css';
 import Learn from "./components/Learn";
-
-
-
-
 function App() {
 
   return (
