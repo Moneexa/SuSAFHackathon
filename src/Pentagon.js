@@ -1,4 +1,6 @@
 import React from 'react';
+import ImpactAssessment from './ImpactAssessment';
+
 const someArr = [{ effect: 'automate something', impact: 'technology', category: 'enabling' },
 { effect: 'reduce locomotion', impact: 'economic', category: 'structural' },
 { effect: 'reduce need of people', impact: 'social', category: 'structural' },

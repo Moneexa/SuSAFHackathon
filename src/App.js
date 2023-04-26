@@ -4,11 +4,10 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from './components/Home'
 import Pentagon from './components/Pentagon';
 import Header from './components/shared/Header';
+import ImpactAssessment from "./ImpactAssessment";
 import StepForm from "./StepForm";
-
-
-
 import './App.css';
+import Learn from "./components/Learn";
 
 
 
@@ -22,6 +21,8 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/stepper" element={<StepForm />} />
+          <Route path="/learn" element={<Learn />} />
+          <Route path="/impact-assessment" element={<ImpactAssessment />} />
           <Route path="/pentagon" element={<Pentagon />} />
 
         </Routes>
