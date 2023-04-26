@@ -1,10 +1,11 @@
 
 import { React, useState } from "react";
 import { useStoreState, useStoreActions } from "easy-peasy";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Row } from "react-bootstrap";
-
+import DocumentTemplate from "./DocumentTemplate";
 const Pentagon = () => {
+  const navigate = useNavigate();
   const colors = ["#f7f7f7", "#e5e5e5", "#d4d4d4"];
   const pentagon = useStoreState((state) => state.pentagonObject);
   const featureObject = useStoreState((state) => state.featureObject);
@@ -343,9 +344,11 @@ const Pentagon = () => {
       </svg>
       <Row>
 
-        <button className='btn btn-secondary'><Link to="/impact-assessment">See Impact Assessment</Link></button>
+        <button className='btn btn-secondary m-3' onClick={() => {
+          navigate('/impact-assessment')
+        }}>See Impact Assessment</button>
+        <Link to="/doc" className="m-3">Go check the document</Link>
 
-        <button className='btn btn-primary'><Link to="/stepper">Add another feature</Link></button>
       </Row>
     </div >
 

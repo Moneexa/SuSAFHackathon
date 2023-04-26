@@ -1,13 +1,18 @@
 import { React, useEffect } from 'react'
 import { useStoreState } from 'easy-peasy'
 import Draggable from 'react-draggable';
+import { useNavigate } from 'react-router-dom'
 
 
 function ImpactAssessment() {
+    const navigate = useNavigate()
     const graphValues = useStoreState((state) => state.graphValues);
     const colors = ['#fb56b9', '#aa65a3', '#7afcff', '#deff9c', '#fff740'];
     return (
         <div className="m-5">
+            <button className='btn btn-primary m-3 align-items-right' onClick={() => {
+                navigate('/stepper')
+            }}>Add another feature</button>
             <div className="d-flex">
                 <div className="d-flex align-items-center justify-content-center">
                     Likelihood

@@ -1,4 +1,5 @@
 import { React, useState } from "react";
+import { PDFViewer } from '@react-pdf/renderer';
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from './components/Home'
@@ -6,6 +7,7 @@ import Pentagon from './components/Pentagon';
 import Header from './components/shared/Header';
 import ImpactAssessment from "./ImpactAssessment";
 import StepForm from "./StepForm";
+import DocumentTemplate from "./components/DocumentTemplate";
 import './App.css';
 import Learn from "./components/Learn";
 function App() {
@@ -21,6 +23,7 @@ function App() {
           <Route path="/impact-assessment" element={<ImpactAssessment />} />
           <Route path="/pentagon" element={<Pentagon />} />
           <Route path="/impact-assessment" element={<ImpactAssessment />} />
+          <Route path="/doc" element={<DocumentTemplate />} />
         </Routes>
       </Router>
       <footer className="border py-3">
