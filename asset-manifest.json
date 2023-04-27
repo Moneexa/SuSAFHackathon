@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/SuSAFHackathon/static/css/main.5c7de903.css",
+    "main.js": "/SuSAFHackathon/static/js/main.2f56cadd.js",
+    "static/js/787.a6c58097.chunk.js": "/SuSAFHackathon/static/js/787.a6c58097.chunk.js",
+    "index.html": "/SuSAFHackathon/index.html",
+    "main.5c7de903.css.map": "/SuSAFHackathon/static/css/main.5c7de903.css.map",
+    "main.2f56cadd.js.map": "/SuSAFHackathon/static/js/main.2f56cadd.js.map",
+    "787.a6c58097.chunk.js.map": "/SuSAFHackathon/static/js/787.a6c58097.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5c7de903.css",
+    "static/js/main.2f56cadd.js"
+  ]
+}
