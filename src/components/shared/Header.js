@@ -16,6 +16,9 @@ const styles = {
   },
   title: {
     flexGrow: 1,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     textAlign: 'center'
   }
 }

@@ -1,10 +1,10 @@
 import { createStore, action, thunk } from "easy-peasy";
 
 const store = createStore({
-  featureObject : [], 
+  featureObject: [],
   pentagonObject: [],
   graphValues: [],
-
+  productName: "",
   impactArray: [
     {
       env_p:
@@ -25,7 +25,7 @@ const store = createStore({
     },
     {
       economic_p:
-      " It has a positive impact on the economy i.e. by generating monetary value, fostering innovation, increasing GDP, etc.",
+        " It has a positive impact on the economy i.e. by generating monetary value, fostering innovation, increasing GDP, etc.",
     },
     {
       economic_n:
@@ -111,6 +111,16 @@ const store = createStore({
     graph.push(payload.value)
     actions.updateGraphValues(graph)
 
+  }),
+  updateFeature: action((state, payload) => {
+    state.featureArr = payload
+  }),
+  updateProduct: action((state, payload) => {
+    state.productName = payload
+  }),
+  changeProduct: thunk(async (actions, payload) => {
+    const val = payload;
+    actions.updateProduct(val)
   }),
 });
 

@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { Form } from "react-bootstrap";
+import { useStoreActions } from 'easy-peasy';
 import './FunctionalRequirements.css';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 function FunctionalRequirementsForm({ onSubmit }) {
   const [featureslist, setFeatureslist] = useState(['']);
+  const [product_name, setProductName] = useState("");
+  const changeProduct = useStoreActions((actions) => actions.changeProduct);
 
   const handleChange = (index, value) => {
     const newFeatureslist = [...featureslist];
@@ -16,32 +19,40 @@ function FunctionalRequirementsForm({ onSubmit }) {
     setFeatureslist([...featureslist, '']);
   };
 
+  const handleProductChange = (e) => {
+    const val = e.target.value;
+    changeProduct(val)
+    setProductName(val)
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     onSubmit(featureslist);
-    
+
   };
 
   return (
-    
+
 
     <form onSubmit={handleSubmit}>
 
       <Form.Group
-                  controlId="productName"
-                  className="m-3 mt-5"
-                >
-                  <Form.Label>
-                    Name of the Product:
-                  </Form.Label>
-                  <Form.Control
-                    required
-                    type="text"
-                    id="product_name"
-                    name="product_name"
-                    placeholder="type the name of product"
-                  />
-                </Form.Group>
+        controlId="productName"
+        className="m-3 mt-5"
+      >
+        <Form.Label>
+          Name of the Product:
+        </Form.Label>
+        <Form.Control
+          required
+          type="text"
+          id="product_name"
+          name="product_name"
+          value={product_name}
+          onChange={handleProductChange}
+          placeholder="type the name of product"
+        />
+      </Form.Group>
       <h2>Functional Requirements</h2>
       {featureslist.map((feature, index) => (
         <div key={index}>

@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 
 const steps = ["Feature Selection and 1st Degree Impact", "2nd Degree Impact", "3rd Degree Impact", "4th Degree Impact"];
 
-export default function StepForm({options}) {
+export default function StepForm({ options }) {
   const impactArray = useStoreState((state) => state.impactArray);
   const pentagonObject = useStoreState((state) => state.pentagonObject);
   const impactArrayPop = useStoreActions((actions) => actions.impactArrayPop);
@@ -23,13 +23,19 @@ export default function StepForm({options}) {
   const graphValues = useStoreState((state) => state.graphValues);
   const changeGraphValues = useStoreActions((actions) => actions.changeGraphValues);
   const [selectedfeature, setSelectedFeature] = useState('');
-  const [featureslist, setFeatureslist] = useState([]);
+  const productName = useStoreState(state => state.productName)
+  const [features, setFeatures] = useState("");
+
+  const handleOnChange = (e) => {
+    const val = e.target.value;
+    setFeatures(val);
+  }
 
 
 
   const navigate = useNavigate();
 
-  
+
   const maintainFeature = useStoreActions(
     (actions) => actions.maintainFeature
   );
@@ -123,12 +129,13 @@ export default function StepForm({options}) {
       newSkipped = new Set(newSkipped.values());
       newSkipped.delete(activeStep);
     }
+    setFeatureAnswers({ ...featureAnswers, "product_name": [productName] })
     console.log(featureAnswers);
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
     const ans = {}
     ans["impact"] = "technology"
-    ans["effect"] = featureAnswers.feature
+    ans["effect"] = features
     ans["category"] = "enabling"
     pentagon(ans)
     const answerObj = featureAnswers.impact
@@ -200,6 +207,8 @@ export default function StepForm({options}) {
       impact2Answers,
       impact3Answers
     }
+
+
 
 
     maintainFeature({ featureObject, response })
@@ -356,24 +365,24 @@ export default function StepForm({options}) {
               <h1 className="formheading">First, tell us a bit about the feature whose impact you are planning to asses.</h1>
               <h2 className="formheading">We want you to begin thinking about one feature. You can start with any! Then think of the most immidiate impact of that feature.</h2>
               <div className="d-flex justify-content-between w-100">
-                
-                  <Form.Group className="m-3">
+
+                <Form.Group className="m-3">
                   <Form.Label>The Feature you are assessing:</Form.Label>
-                  <Form.Control
+                  <Form.Select
                     required
                     as="select"
                     id="featureslist"
                     name="featureslist"
-                    value={options}
-                    onChange={handleInputChangeFeature}
+                    value={features}
+                    onChange={handleOnChange}
                   >
-                    <option value="">Select a feature</option>
+                    <option value="selectedFeature"> Select a feature</option>
                     {options.map((selectedfeature, index) => (
-                      <option key={index} value={selectedfeature}>
+                      <option key={index} value={selectedfeature} >
                         {selectedfeature}
                       </option>
                     ))}
-                  </Form.Control>
+                  </Form.Select>
                 </Form.Group>
 
 
