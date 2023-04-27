@@ -9,6 +9,7 @@ import ImpactAssessment from "./ImpactAssessment";
 import StepForm from "./StepForm";
 import DocumentTemplate from "./components/DocumentTemplate";
 import FunctionalRequirementsForm from "./components/FunctionalRequirements";
+import HowToUseSusAF from "./components/HowTo";
 import './App.css';
 import Learn from "./components/Learn";
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route path="functionalrequirements" element={<FunctionalRequirementsForm onSubmit={handleFunctionalRequirementsSubmit} featureslist={featureslist} />} />
           <Route path="/stepper" element={<StepForm options={featureslist} />} />
           <Route path="/learn" element={<Learn />} />
+          <Route path="/howto" element={<HowToUseSusAF />} />
           <Route path="/impact-assessment" element={<ImpactAssessment />} />
           <Route path="/pentagon" element={<Pentagon />} />
           <Route path="/impact-assessment" element={<ImpactAssessment />} />
