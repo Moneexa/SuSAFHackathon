@@ -1,6 +1,6 @@
-import { React, useEffect } from 'react';
+import React from 'react';
 import { useStoreState } from 'easy-peasy';
-import { Document, Page, Text, PDFViewer, StyleSheet, Image } from '@react-pdf/renderer';
+import { Document, Page, Text, PDFViewer, StyleSheet } from '@react-pdf/renderer';
 function DocumentTemplate() {
     const featureObject = useStoreState((state) => state.featureObject);
 
@@ -26,7 +26,7 @@ function DocumentTemplate() {
                 <Page style={{ padding: "50px" }}>
                     <Text style={{ fontSize: "20px", textAlign: "center", margin: "20px" }}> Your SusAF Assessment Report</Text>
                     <Text style={{ fontSize: "15px" }}>
-                    Through the use of the Susaf Analysis framework, organizations can effectively evaluate the sustainability dimensions of each product feature. This approach ensures that sustainability is integrated into every aspect of the product design and development process, resulting in products that are more sustainable in terms of social, technical, individual, economic, and environmental sustainability. As a result, organizations can make informed decisions on how best to address sustainability challenges, resulting in products that are more socially responsible and environmentally sustainable. By conducting a sustainability analysis using Susaf Analysis, organizations can make significant progress towards a more sustainable future.
+                        Through the use of the Susaf Analysis framework, organizations can effectively evaluate the sustainability dimensions of each product feature. This approach ensures that sustainability is integrated into every aspect of the product design and development process, resulting in products that are more sustainable in terms of social, technical, individual, economic, and environmental sustainability. As a result, organizations can make informed decisions on how best to address sustainability challenges, resulting in products that are more socially responsible and environmentally sustainable. By conducting a sustainability analysis using Susaf Analysis, organizations can make significant progress towards a more sustainable future.
                     </Text>
                     <Text style={{ fontSize: "15px" }}>
                         The Name of the product : {featureObject[0]?.featureAnswers?.product_name}

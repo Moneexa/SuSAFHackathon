@@ -1,5 +1,4 @@
 import { React, useState } from "react";
-import { PDFViewer } from '@react-pdf/renderer';
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from './components/Home'

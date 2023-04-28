@@ -54,8 +54,8 @@ function FunctionalRequirementsForm({ onSubmit }) {
         />
       </Form.Group>
       <h2>Functional Requirements</h2>
-      {featureslist.map((feature, index) => (
-        <div key={index}>
+      {featureslist.map((feature, index) => {
+        return (<div key={index}>
           <label>
             Feature #{index + 1}:
             <input
@@ -65,7 +65,9 @@ function FunctionalRequirementsForm({ onSubmit }) {
             />
           </label>
         </div>
-      ))}
+        )
+      }
+      )}
       <button type="button" onClick={handleAddFeature}>
         Add Feature <span role="img" aria-label="plus">➕</span>
       </button>

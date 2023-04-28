@@ -1,71 +1,12 @@
 
-import { React, useState } from "react";
-import { useStoreState, useStoreActions } from "easy-peasy";
+import React from "react";
+import { useStoreState } from "easy-peasy";
 import { Link, useNavigate } from "react-router-dom";
 import { Row } from "react-bootstrap";
-import DocumentTemplate from "./DocumentTemplate";
 const Pentagon = () => {
   const navigate = useNavigate();
   const colors = ["#f7f7f7", "#e5e5e5", "#d4d4d4"];
   const pentagon = useStoreState((state) => state.pentagonObject);
-  const featureObject = useStoreState((state) => state.featureObject);
-  const impactArray = useStoreState((state) => state.impactArray);
-  const setImpactArray = useStoreActions((actions) => actions.setImpactArray);
-  const maintainFeature = useStoreActions((actions) => actions.maintainFeature);
-  const repopulateArray = (svgDiv) => {
-    const impactArr = [
-      {
-        env_p:
-          "It affects environment i.e. produces waste, has a large carbon footprint, utilizes excessive amount of resources.",
-      },
-      {
-        env_n:
-          "It has a positive impact on the environment e.g. reduces the use of any resources, makes any process efficient.",
-      },
-      {
-        social_p:
-          "It impacts society by improving the living conditions of humans.",
-      },
-      {
-        social_n:
-          "It could have a negative impact on society e.g harms social interaction.",
-      },
-      {
-        economic_p:
-          " It positively impacts economy e.g. creates monetary value, promotes innovation, increases GDP of the region, improves governance.",
-      },
-      {
-        economic_n:
-          "It negatively impacts economy e.g. job loss, financial loss, relies heavily on financial resources.",
-      },
-      {
-        ind_p:
-          "It positively impacts individual health, improves mental health, promotes lifelong learning, ensures privacy.",
-      },
-      {
-        ind_n:
-          "It negatively impacts the individual health e.g. causes emotional distress, impacts physical or mental health, compromises safety or privacy.",
-      },
-    ];
-
-    setImpactArray(impactArr);
-    const div = svgDiv;
-    const canvas = document.createElement("canvas");
-    canvas.width = div.clientWidth;
-    canvas.height = div.clientHeight;
-    const ctx = canvas.getContext("2d");
-    const img = new Image();
-    img.onload = () => {
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      const imgData = canvas.toDataURL();
-      const imgElement = document.createElement("img");
-      imgElement.src = imgData;
-      document.body.appendChild(imgElement); // append the image to the document
-    };
-    img.src = "data:image/svg+xml," + encodeURIComponent(div.innerHTML);
-    const img2 = img.src;
-    maintainFeature({ featureObject, img2 }); //not working. adds null object
-  };
 
   const lines = [];
   for (let i = 0; i < 5; i++) {
@@ -126,7 +67,7 @@ const Pentagon = () => {
    */
   const impactCards = [];
   const paths = [];
-  pentagon.map((value, ind) => {
+  pentagon.forEach((value, ind) => {
     if (value.impact === "technology") {
       impactCards.push(
         <text key={ind} filter="url(#technology)" x="20" y="-20" fontSize="2">
@@ -135,14 +76,14 @@ const Pentagon = () => {
       );
       paths.push([20, -20]);
     } else if (value.impact === "social") {
-      if (value.category == "enabling") {
+      if (value.category === "enabling") {
         impactCards.push(
           <text key={ind} filter="url(#social)" x="-31" y="-15" fontSize="2">
             {value.effect}
           </text>
         );
         paths.push([-31, -15]);
-      } else if (value.category == "immediate") {
+      } else if (value.category === "immediate") {
         impactCards.push(
           <text key={ind} filter="url(#social)" x="-30" y="-10" fontSize="2">
             {value.effect}
@@ -158,14 +99,14 @@ const Pentagon = () => {
         paths.push([-35, -20]);
       }
     } else if (value.impact === "individual") {
-      if (value.category == "enabling") {
+      if (value.category === "enabling") {
         impactCards.push(
           <text key={ind} filter="url(#individual)" x="-25" y="5" fontSize="2">
             {value.effect}
           </text>
         );
         paths.push([-25, 5]);
-      } else if (value.category == "immediate") {
+      } else if (value.category === "immediate") {
         impactCards.push(
           <text key={ind} filter="url(#individual)" x="-15" y="5" fontSize="2">
             {value.effect}
@@ -181,14 +122,14 @@ const Pentagon = () => {
         paths.push([-35, 5]);
       }
     } else if (value.impact === "economic") {
-      if (value.category == "enabling") {
+      if (value.category === "enabling") {
         impactCards.push(
           <text key={ind} filter="url(#economic)" x="15" y="5" fontSize="2">
             {value.effect}
           </text>
         );
         paths.push([15, 5]);
-      } else if (value.category == "immediate") {
+      } else if (value.category === "immediate") {
         impactCards.push(
           <text key={ind} filter="url(#economic)" x="10" y="5" fontSize="2">
             {value.effect}
@@ -204,7 +145,7 @@ const Pentagon = () => {
         paths.push([20, 5]);
       }
     } else if (value.impact === "environmental") {
-      if (value.category == "enabling") {
+      if (value.category === "enabling") {
         impactCards.push(
           <text
             key={ind}
@@ -217,7 +158,7 @@ const Pentagon = () => {
           </text>
         );
         paths.push([-5, 25]);
-      } else if (value.category == "immediate") {
+      } else if (value.category === "immediate") {
         impactCards.push(
           <text
             key={ind}
@@ -343,14 +284,14 @@ const Pentagon = () => {
         </g>
       </svg>
       <Row>
-      <button className='btn btn-primary m-3 align-items-right' onClick={() => {
-                navigate('/stepper')
-            }}>Add another feature</button>
+        <button className='btn btn-primary m-3 align-items-right' onClick={() => {
+          navigate('/stepper')
+        }}>Add another feature</button>
 
         <button className='btn btn-secondary m-3' onClick={() => {
           navigate('/impact-assessment')
         }}>See Impact Assessment</button>
-        
+
         <Link to="/doc" className="m-3">Go check the document</Link>
 
       </Row>

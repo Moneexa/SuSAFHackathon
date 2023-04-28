@@ -7,8 +7,6 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Form } from "react-bootstrap";
 import { useStoreActions, useStoreState } from "easy-peasy";
-import FunctionalRequirements from "./components/FunctionalRequirements";
-import DropdownMenu from "./components/DropDownMenu";
 import './StepForm.css';
 import { useNavigate } from "react-router-dom";
 
@@ -22,7 +20,6 @@ export default function StepForm({ options }) {
   const featureObject = useStoreState((state) => state.featureObject);
   const graphValues = useStoreState((state) => state.graphValues);
   const changeGraphValues = useStoreActions((actions) => actions.changeGraphValues);
-  const [selectedfeature, setSelectedFeature] = useState('');
   const productName = useStoreState(state => state.productName)
   const [features, setFeatures] = useState("");
 
@@ -250,7 +247,7 @@ export default function StepForm({ options }) {
     console.log({ name, value })
     const impactArr = impactArray;
     let val = "";
-    impactArr.map((elem) => {
+    impactArr.forEach((elem) => {
       if (Object.keys(elem)[0] === value) {
         val = elem[value]
       }
@@ -271,7 +268,7 @@ export default function StepForm({ options }) {
     console.log({ name, value })
     const impactArr = impactArray;
     let val = "";
-    impactArr.map((elem) => {
+    impactArr.forEach((elem) => {
       if (Object.keys(elem)[0] === value) {
         val = elem[value]
       }
@@ -292,7 +289,7 @@ export default function StepForm({ options }) {
     console.log({ name, value })
     const impactArr = impactArray;
     let val = "";
-    impactArr.map((elem) => {
+    impactArr.forEach((elem) => {
       if (Object.keys(elem)[0] === value) {
         val = elem[value]
       }
@@ -304,7 +301,7 @@ export default function StepForm({ options }) {
     console.log({ name, value })
     const impactArr = impactArray;
     let val = "";
-    impactArr.map((elem) => {
+    impactArr.forEach((elem) => {
       if (Object.keys(elem)[0] === value) {
         val = elem[value]
       }
@@ -321,7 +318,7 @@ export default function StepForm({ options }) {
     console.log({ name, value })
     const impactArr = impactArray;
     let val = "";
-    impactArr.map((elem) => {
+    impactArr.forEach((elem) => {
       if (Object.keys(elem)[0] === value) {
         val = elem[value]
       }
@@ -337,23 +334,24 @@ export default function StepForm({ options }) {
     <div className="d-flex justify-content-center align-items-center m-5">
       <Box sx={{ width: "100%" }}>
         <Stepper activeStep={activeStep}>
-          {steps.map((label, index) => {
-            const stepProps = {};
-            const labelProps = {};
-            if (isStepOptional(index)) {
-              labelProps.optional = (
-                <Typography variant="caption">Optional</Typography>
+          {
+            steps.map((label, index) => {
+              const stepProps = {};
+              const labelProps = {};
+              if (isStepOptional(index)) {
+                labelProps.optional = (
+                  <Typography variant="caption">Optional</Typography>
+                );
+              }
+              if (isStepSkipped(index)) {
+                stepProps.completed = false;
+              }
+              return (
+                <Step key={label} {...stepProps}>
+                  <StepLabel {...labelProps}>{label}</StepLabel>
+                </Step>
               );
-            }
-            if (isStepSkipped(index)) {
-              stepProps.completed = false;
-            }
-            return (
-              <Step key={label} {...stepProps}>
-                <StepLabel {...labelProps}>{label}</StepLabel>
-              </Step>
-            );
-          })}
+            })}
         </Stepper>
         {activeStep === 0 ? (
           <Fragment>
@@ -377,11 +375,16 @@ export default function StepForm({ options }) {
                     onChange={handleOnChange}
                   >
                     <option value="selectedFeature"> Select a feature</option>
-                    {options.map((selectedfeature, index) => (
-                      <option key={index} value={selectedfeature} >
-                        {selectedfeature}
-                      </option>
-                    ))}
+                    {
+                      options.map((selectedfeature, index) => {
+                        return (
+                          <option key={index} value={selectedfeature} >
+                            {selectedfeature}
+                          </option>
+
+                        )
+                      }
+                      )}
                   </Form.Select>
                 </Form.Group>
 
@@ -393,21 +396,22 @@ export default function StepForm({ options }) {
                 <Form.Label >
                   Identifying the impact of your feature
                 </Form.Label>
-                {impactArray?.map((value, index) => {
-                  return (
-                    <div key={index}>
-                      <Form.Check
-                        type="radio"
-                        required
-                        id={`radio${index}`}
-                        name="impact"
-                        value={Object.keys(value)[0]}
-                        onChange={handleInputRadioFeature}
-                        label={Object.values(value)[0]}
-                      />
-                    </div>
-                  );
-                })}
+                {
+                  impactArray?.map((value, index) => {
+                    return (
+                      <div key={index}>
+                        <Form.Check
+                          type="radio"
+                          required
+                          id={`radio${index}`}
+                          name="impact"
+                          value={Object.keys(value)[0]}
+                          onChange={handleInputRadioFeature}
+                          label={Object.values(value)[0]}
+                        />
+                      </div>
+                    );
+                  })}
               </Form.Group>
               <Form.Group className="m-2 w-100">
                 <Form.Label>
@@ -536,21 +540,22 @@ export default function StepForm({ options }) {
                 <Form.Label>
                   Identifying the impact of your feature
                 </Form.Label>
-                {impactArray?.map((value, index) => {
-                  return (
-                    <div key={index}>
-                      <Form.Check
-                        required
-                        type="radio"
-                        id={`radio${index}`}
-                        name="impact"
-                        value={Object.keys(value)[0]}
-                        onChange={handleInputRadioImpact1}
-                        label={Object.values(value)[0]}
-                      />
-                    </div>
-                  );
-                })}
+                {
+                  impactArray?.map((value, index) => {
+                    return (
+                      <div key={index}>
+                        <Form.Check
+                          required
+                          type="radio"
+                          id={`radio${index}`}
+                          name="impact"
+                          value={Object.keys(value)[0]}
+                          onChange={handleInputRadioImpact1}
+                          label={Object.values(value)[0]}
+                        />
+                      </div>
+                    );
+                  })}
               </Form.Group>
 
               <Form.Group className="m-3 w-100">
@@ -685,21 +690,22 @@ export default function StepForm({ options }) {
                 <Form.Label>
                   Identifying the impact of your feature
                 </Form.Label>
-                {impactArray?.map((value, index) => {
-                  return (
-                    <div key={index}>
-                      <Form.Check
-                        required
-                        type="radio"
-                        id={`radio${index}`}
-                        name="impact"
-                        value={Object.keys(value)[0]}
-                        onChange={handleInputRadioImpact2}
-                        label={Object.values(value)[0]}
-                      />
-                    </div>
-                  );
-                })}
+                {
+                  impactArray?.map((value, index) => {
+                    return (
+                      <div key={index}>
+                        <Form.Check
+                          required
+                          type="radio"
+                          id={`radio${index}`}
+                          name="impact"
+                          value={Object.keys(value)[0]}
+                          onChange={handleInputRadioImpact2}
+                          label={Object.values(value)[0]}
+                        />
+                      </div>
+                    );
+                  })}
               </Form.Group>
 
               <Form.Group className="m-3 w-100">
@@ -831,21 +837,22 @@ export default function StepForm({ options }) {
                 <Form.Label>
                   Identifying the impact of your feature
                 </Form.Label>
-                {impactArray?.map((value, index) => {
-                  return (
-                    <div key={index}>
-                      <Form.Check
-                        required
-                        type="radio"
-                        id={`radio${index}`}
-                        name="impact"
-                        value={Object.keys(value)[0]}
-                        onChange={handleInputRadioImpact3}
-                        label={Object.values(value)[0]}
-                      />
-                    </div>
-                  );
-                })}
+                {
+                  impactArray?.map((value, index) => {
+                    return (
+                      <div key={index}>
+                        <Form.Check
+                          required
+                          type="radio"
+                          id={`radio${index}`}
+                          name="impact"
+                          value={Object.keys(value)[0]}
+                          onChange={handleInputRadioImpact3}
+                          label={Object.values(value)[0]}
+                        />
+                      </div>
+                    );
+                  })}
               </Form.Group>
 
               <Form.Group className="m-3 w-100">
