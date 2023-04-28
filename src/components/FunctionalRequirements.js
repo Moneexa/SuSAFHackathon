@@ -3,6 +3,7 @@ import { Form } from "react-bootstrap";
 import { useStoreActions } from 'easy-peasy';
 import './FunctionalRequirements.css';
 import { Link } from 'react-router-dom'
+import { Row } from 'react-bootstrap';
 
 function FunctionalRequirementsForm({ onSubmit }) {
   const [featureslist, setFeatureslist] = useState(['']);
@@ -33,8 +34,7 @@ function FunctionalRequirementsForm({ onSubmit }) {
 
   return (
 
-
-    <form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} className='d-flex justify-content-center m-5'>
 
       <Form.Group
         controlId="productName"
@@ -71,7 +71,8 @@ function FunctionalRequirementsForm({ onSubmit }) {
       </button>
       <button type="submit">Submit</button>
       <Link to="/stepper" className="button">start assessing features</Link>
-    </form>
+
+    </Form>
   );
 }
 
