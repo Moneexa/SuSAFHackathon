@@ -427,7 +427,7 @@ export default function StepForm({ options }) {
               <div className="d-flex justify-content-between w-100">
                 <Form.Group className="m-2">
                   <Form.Label>
-                    What is the likelihood of the occurance of the impact:
+                    What is the likelihood of the occurance of the impact (Enter values as a percentage, from 1 to 100, where 1 is least likely and 100 is very likely.)
                   </Form.Label>
                   <Form.Control
                     required
@@ -442,7 +442,7 @@ export default function StepForm({ options }) {
                 </Form.Group>
                 <Form.Group className="m-2">
                   <Form.Label>
-                    What is the intensity of the occurance of the impact:
+                    What is the intensity of the occurance of the impact (Enter values as a percentage, from 1 to 100, where 1 is low  and 100 is very high.)
                   </Form.Label>
                   <Form.Control
                     required
@@ -574,7 +574,7 @@ export default function StepForm({ options }) {
               <div className="d-flex justify-content-between w-100">
                 <Form.Group className="m-2">
                   <Form.Label>
-                    What is the likelihood of the occurance of the impact:
+                    What is the likelihood of the occurance of the impact (Enter values as a percentage, from 1 to 100, where 1 is not high at all and 100 is very high.)
                   </Form.Label>
                   <Form.Control
                     required
@@ -589,7 +589,7 @@ export default function StepForm({ options }) {
                 </Form.Group>
                 <Form.Group className="m-2">
                   <Form.Label>
-                    What is the intensity of the occurance of the impact:
+                    What is the intensity of the occurance of the impact (Enter values as a percentage, from 1 to 100, where 1 is low  and 100 is very high.)
                   </Form.Label>
                   <Form.Control
                     required
@@ -720,7 +720,7 @@ export default function StepForm({ options }) {
               <div className="d-flex justify-content-between w-100">
                 <Form.Group className="m-2">
                   <Form.Label>
-                    What is the likelihood of the occurance of the impact:
+                    What is the likelihood of the occurance of the impact (Enter values as a percentage, from 1 to 100, where 1 is least likely and 100 is most likely.)
                   </Form.Label>
                   <Form.Control
                     type="number"
@@ -734,7 +734,7 @@ export default function StepForm({ options }) {
                 </Form.Group>
                 <Form.Group className="m-2">
                   <Form.Label>
-                    What is the intensity of the occurance of the impact:
+                    What is the intensity of the occurance of the impact (Enter values as a percentage, from 1 to 100, where 1 is low  and 100 is very high.)
                   </Form.Label>
                   <Form.Control
                     type="number"
@@ -866,7 +866,7 @@ export default function StepForm({ options }) {
               <div className="d-flex justify-content-between w-100">
                 <Form.Group className="m-2">
                   <Form.Label>
-                    What is the likelihood of the occurance of the impact:
+                    What is the likelihood of the occurance of the impact (Enter values as a percentage, from 1 to 100, where 1 is least likely and 100 is very likely.)
                   </Form.Label>
                   <Form.Control
                     type="number"
@@ -880,7 +880,7 @@ export default function StepForm({ options }) {
                 </Form.Group>
                 <Form.Group className="m-2">
                   <Form.Label>
-                    What is the intensity of the occurance of the impact:
+                    What is the intensity of the occurance of the impact (Enter values as a percentage, from 1 to 100, where 1 is low  and 100 is very high.)
                   </Form.Label>
                   <Form.Control
                     type="number"
