@@ -532,7 +532,7 @@ export default function StepForm({ options }) {
               style={{ textAlign: "left" }}
               onSubmit={handleNext2}
             >
-              <h1>{selectedfeature}</h1>
+              <h1>{features}</h1>
               <p className="formheading">You should know that each impact also has a consequent impact. So enter the impact of Impact no. 1. </p>
               <Form.Group
                 className="m-3"
