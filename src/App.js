@@ -12,17 +12,12 @@ import HowToUseSusAF from "./components/HowTo";
 import './App.css';
 import Learn from "./components/Learn";
 function App() {
-
   const [featureslist, setFeatureslist] = useState([]);
-
-
   const handleFunctionalRequirementsSubmit = (newFeatures) => {
     setFeatureslist([...featureslist, ...newFeatures]);
     console.log(featureslist)
   };
-
-
-  return (
+ return (
     <div className="App">
       <Header />
       <Router>
